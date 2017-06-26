@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ScheduleSelectorComponent } from './schedule-selector.component';
+import { LibsModule } from 'app/libs/libs.module';
 
 describe('ScheduleSelectorComponent', () => {
   let component: ScheduleSelectorComponent;
@@ -8,9 +10,13 @@ describe('ScheduleSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScheduleSelectorComponent ]
+      imports: [
+        LibsModule,
+        NoopAnimationsModule
+      ],
+      declarations: [ScheduleSelectorComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
