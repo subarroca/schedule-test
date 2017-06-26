@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Weekday } from 'app/shared/weekday';
 import { DayPeriod } from 'app/shared/day-period';
+import { Schedule } from 'app/schedule/shared/schedule';
 
 @Component({
   selector: 'app-schedule',
@@ -8,22 +9,12 @@ import { DayPeriod } from 'app/shared/day-period';
   styleUrls: ['./schedule.component.scss']
 })
 export class ScheduleComponent implements OnInit {
-  @Input() firstDay = 0;
-  @Input() firstPeriod = 0;
-  @Input() numPeriods = 3;
-  @Input() numDays = 7;
+  @Input() schedule: Schedule = new Schedule();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  get sortedDays() {
-    return Weekday.getSortedDays(this.firstDay).slice(0, this.numDays);
-  }
-
-  get sortedPeriods() {
-    return DayPeriod.getSortedPeriods(this.firstPeriod, this.numPeriods);
-  }
 
 }

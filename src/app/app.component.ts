@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Schedule } from 'app/schedule/shared/schedule';
 
 @Component({
   selector: 'app-root',
@@ -6,8 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  schedule: number;
-  firstPeriod: number;
-  numDays: number;
-  numPeriods: number;
+  schedule: Schedule = new Schedule();
 }

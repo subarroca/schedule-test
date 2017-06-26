@@ -1,21 +1,21 @@
 <md-grid-list
-  [cols] = "numDays+1"
+  [cols] = "schedule.numDays+1"
   rowHeight = 50px>
   <md-grid-tile>
   </md-grid-tile>
 
   <!--days-->
   <md-grid-tile
-    *ngFor = "let day of sortedDays">
+    *ngFor = "let day of schedule.sortedDays">
     {{ day }}
   </md-grid-tile>
 
   <div
-    *ngFor = "let period of sortedPeriods">
+    *ngFor = "let period of schedule.sortedPeriods">
     <md-grid-tile>{{period}}</md-grid-tile>
 
     <md-grid-tile
-      *ngFor = "let day of sortedDays">
+      *ngFor = "let day of schedule.sortedDays">
       {{day}} - {{period}}
     </md-grid-tile>
   </div>

@@ -10,7 +10,7 @@
       formControlName = firstDay
       placeholder = "First day">
         <md-option
-          *ngFor = "let day of days; let i = index"
+          *ngFor = "let day of schedule.days; let i = index"
           [value] = i>
           {{day}}
         </md-option>
@@ -21,7 +21,7 @@
       formControlName = numDays
       placeholder = "Number of days">
         <md-option
-          *ngFor = "let num of numDaysOptions"
+          *ngFor = "let num of schedule.numDaysOptions"
           [value] = num>
           {{num}}
         </md-option>
@@ -32,7 +32,7 @@
       formControlName = numPeriods
       placeholder = "Number of periods">
         <md-option
-          *ngFor = "let num of numPeriodsOptions"
+          *ngFor = "let num of schedule.numPeriodsOptions"
           [value] = num>
           {{num}}
         </md-option>
@@ -43,7 +43,7 @@
       formControlName = firstPeriod
       placeholder = "First period">
         <md-option
-          *ngFor = "let period of periods; let i = index"
+          *ngFor = "let period of schedule.periods; let i = index"
           [value] = i>
           {{period}}
         </md-option>
@@ -55,6 +55,7 @@
     <input
       type = text
       mdInput
+      formControlName = comment
       placeholder = Comment>
   </md-input-container>
 </form>

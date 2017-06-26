@@ -8,16 +8,10 @@
 
     <md-card-content>
       <app-schedule-selector
-        [(firstDay)] = firstDay
-        [(firstPeriod)] = firstPeriod
-        [(numDays)] = numDays
-        [(numPeriods)] = numPeriods>
+        [(schedule)] = schedule>
       </app-schedule-selector>
       <app-schedule
-        [firstDay] = firstDay
-        [firstPeriod] = firstPeriod
-        [numDays] = numDays
-        [numPeriods] = numPeriods>
+        [schedule] = schedule>
       </app-schedule>
     </md-card-content>
   </md-card>
