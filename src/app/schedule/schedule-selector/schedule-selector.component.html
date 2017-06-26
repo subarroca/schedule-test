@@ -1,0 +1,60 @@
+<form
+  [formGroup] = form
+  fxLayout = column
+  fxLayoutGap = 1em>
+  <div
+    fxLayout = row
+    fxLayoutGap = 1em>
+    <md-select
+      fxFlex
+      formControlName = firstDay
+      placeholder = "First day">
+        <md-option
+          *ngFor = "let day of days; let i = index"
+          [value] = i>
+          {{day}}
+        </md-option>
+    </md-select>
+    
+    <md-select
+      fxFlex
+      formControlName = numDays
+      placeholder = "Number of days">
+        <md-option
+          *ngFor = "let num of numDaysOptions"
+          [value] = num>
+          {{num}}
+        </md-option>
+    </md-select>
+    
+    <md-select
+      fxFlex
+      formControlName = numPeriods
+      placeholder = "Number of periods">
+        <md-option
+          *ngFor = "let num of numPeriodsOptions"
+          [value] = num>
+          {{num}}
+        </md-option>
+    </md-select>
+    
+    <md-select
+      fxFlex
+      formControlName = firstPeriod
+      placeholder = "First period">
+        <md-option
+          *ngFor = "let period of periods; let i = index"
+          [value] = i>
+          {{period}}
+        </md-option>
+    </md-select>
+  </div>
+  
+  <md-input-container
+    fxFlex>
+    <input
+      type = text
+      mdInput
+      placeholder = Comment>
+  </md-input-container>
+</form>

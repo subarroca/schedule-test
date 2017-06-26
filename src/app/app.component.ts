@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app';
+  schedule: number;
+  firstPeriod: number;
+  numDays: number;
+  numPeriods: number;
 }
