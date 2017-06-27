@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Schedule } from './schedule';
+import { SchedulePeriodContent } from 'app/schedule/shared/schedule-period-content';
 
-describe('Model: Schedule', () => {
+describe('Model: Schedule:', () => {
   const mock1 = {
     firstDay: 6,
     numDays: 4,
@@ -78,6 +79,115 @@ describe('Model: Schedule', () => {
 
     expect(periods[0]).toBe(0);
     expect(periods.length).toBe(3);
+  });
+
+
+
+
+  // CONTENTS
+  // TODO: control limitation of additions outside valid period
+  describe('Content management:', () => {
+    let schedule;
+    let initialContent;
+
+    beforeEach(() => {
+      schedule = new Schedule();
+      initialContent = schedule.addContent(0, 0);
+    });
+
+    it('should get content if it starts in given period', () => {
+      const content = schedule.getContent(0, 0);
+
+      expect(content).toBeDefined();
+    });
+
+    it('should not get content if it starts before given period', () => {
+      const content = schedule.getContent(0, 1);
+
+      expect(content).toBeUndefined();
+    });
+
+    it('should return added content', () => {
+      expect(initialContent).toBeDefined();
+    });
+
+    it('should add content if none in given period', () => {
+      const newContent = schedule.addContent(1, 0);
+
+      expect(newContent).toBeDefined();
+    });
+
+    it('should not add content if already present in given period', () => {
+      schedule.addContent(0, 0);
+      schedule.periodContents[0].endPeriod = 1;
+      const newContent = schedule.addContent(0, 1);
+
+      expect(newContent).toBeUndefined();
+    });
+
+    it('should delete content if it exists', () => {
+      const deletedContent = schedule.deleteContent(initialContent);
+
+      expect(deletedContent).toBeUndefined();
+      expect(schedule.periodContents.length).toBe(0);
+    });
+
+    it('should not delete content if it does not exist', () => {
+      // values are the same but objects are different
+      const newContent = new SchedulePeriodContent(initialContent);
+      const deletedContent = schedule.deleteContent(newContent);
+
+      expect(deletedContent).toBeDefined();
+      expect(schedule.periodContents.length).toBe(1);
+    });
+
+    describe('Content edition:', () => {
+      let newContent;
+      let updatedContent;
+
+      beforeEach(() => {
+        newContent = new SchedulePeriodContent({
+          startPeriod: 0,
+          endPeriod: 1,
+          day: 0,
+          label: 'updated'
+        });
+        updatedContent = schedule.editContent(initialContent, newContent);
+      });
+
+      it('should update content', () => {
+        expect(updatedContent.label).toBe(newContent.label);
+      });
+
+      it('should return updated content', () => {
+        expect(updatedContent).toBeDefined();
+      });
+    });
+
+    it('should move content if empty', () => {
+      const newContent = new SchedulePeriodContent({
+        startPeriod: 1,
+        day: 1
+      });
+      const updatedContent = schedule.editContent(initialContent, newContent);
+
+      expect(updatedContent).toBeDefined();
+
+    });
+
+    it('should not move content if occupied', () => {
+      const newContent = new SchedulePeriodContent({
+        startPeriod: 1,
+        day: 1,
+        label: 'updated'
+      });
+      schedule.addContent(1, 1);
+      // here we have initial and second, let's try to override initial with new, which overlaps second
+      const updatedContent = schedule.editContent(initialContent, newContent);
+
+      expect(updatedContent).toBeUndefined();
+
+    });
   });
 
 });

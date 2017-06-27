@@ -16,7 +16,7 @@
 
     <md-grid-tile
       *ngFor = "let day of schedule.sortedDays">
-      {{day}} - {{period}}
+      {{schedule.getContent(day,period) | json}}
     </md-grid-tile>
   </div>
 </md-grid-list>
