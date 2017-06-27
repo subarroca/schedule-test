@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { Subscription } from 'rxjs/Subscription';
@@ -12,7 +12,7 @@ import { Schedule } from 'app/schedule/shared/schedule';
   templateUrl: './schedule-selector.component.html',
   styleUrls: ['./schedule-selector.component.scss']
 })
-export class ScheduleSelectorComponent implements OnInit, OnDestroy {
+export class ScheduleSelectorComponent implements OnInit, OnDestroy, OnChanges {
   @Input() schedule: Schedule = new Schedule();
   @Output() scheduleChange: EventEmitter<Schedule> = new EventEmitter();
 
@@ -45,6 +45,20 @@ export class ScheduleSelectorComponent implements OnInit, OnDestroy {
     if (this.form$$) {
       this.form$$.unsubscribe();
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if ('schedule' in changes) {
+      this.updateForm();
+    }
+  }
+
+  updateForm() {
+    this.firstDayControl.setValue(this.schedule.firstDay);
+    this.numDaysControl.setValue(this.schedule.numDays);
+    this.firstPeriodControl.setValue(this.schedule.firstPeriod);
+    this.numPeriodsControl.setValue(this.schedule.numPeriods);
+    this.commentControl.setValue(this.schedule.comment);
   }
 
 }

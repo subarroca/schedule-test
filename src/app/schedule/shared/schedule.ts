@@ -115,10 +115,10 @@ export class Schedule {
   }
 
   get numDaysOptions() {
-    return Array.from(Array(this.days.length).keys());
+    return Array.from(Array(this.days.length + 1).keys()).slice(1);
   }
 
   get numPeriodsOptions() {
-    return Array.from(Array(this.periods.length).keys());
+    return Array.from(Array(this.periods.length + 1).keys()).slice(1);
   }
 }
