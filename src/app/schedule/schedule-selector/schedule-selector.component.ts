@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
 import { Subscription } from 'rxjs/Subscription';
@@ -6,16 +6,14 @@ import { Subscription } from 'rxjs/Subscription';
 import { Weekday } from 'app/shared/weekday';
 import { DayPeriod } from 'app/shared/day-period';
 import { Schedule } from 'app/schedule/shared/schedule';
+import { ScheduleService } from 'app/schedule/shared/schedule.service';
 
 @Component({
   selector: 'app-schedule-selector',
   templateUrl: './schedule-selector.component.html',
   styleUrls: ['./schedule-selector.component.scss']
 })
-export class ScheduleSelectorComponent implements OnInit, OnDestroy, OnChanges {
-  @Input() schedule: Schedule = new Schedule();
-  @Output() scheduleChange: EventEmitter<Schedule> = new EventEmitter();
-
+export class ScheduleSelectorComponent implements OnInit, OnDestroy {
   firstDayControl = new FormControl();
   numDaysControl = new FormControl();
   firstPeriodControl = new FormControl();
@@ -31,14 +29,24 @@ export class ScheduleSelectorComponent implements OnInit, OnDestroy, OnChanges {
   });
   form$$: Subscription;
 
-  constructor() { }
+  schedule: Schedule;
+
+  constructor(
+    private scheduleService: ScheduleService
+  ) { }
 
   ngOnInit() {
     this.form$$ = this.form
       .valueChanges
       .subscribe(
-      schedule => this.scheduleChange.emit(new Schedule(schedule))
-      );
+      schedule => this.scheduleService.updateLocalSchedule(new Schedule(schedule)));
+
+    this.scheduleService.localSchedule$
+      .first()
+      .subscribe(schedule => {
+        this.schedule = schedule;
+        this.updateForm();
+      })
   }
 
   ngOnDestroy() {
@@ -47,11 +55,6 @@ export class ScheduleSelectorComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if ('schedule' in changes) {
-      this.updateForm();
-    }
-  }
 
   updateForm() {
     this.firstDayControl.setValue(this.schedule.firstDay);

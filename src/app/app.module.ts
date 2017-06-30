@@ -6,6 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ScheduleModule } from 'app/schedule/schedule.module';
 import { LibsModule } from 'app/libs/libs.module';
+import { ScheduleService } from 'app/schedule/shared/schedule.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { LibsModule } from 'app/libs/libs.module';
     ScheduleModule,
     LibsModule
   ],
-  providers: [],
+  providers: [ScheduleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

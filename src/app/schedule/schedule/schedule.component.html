@@ -1,6 +1,6 @@
 <md-grid-list
   [cols] = "schedule.numDays+1"
-  rowHeight = 50px>
+  rowHeight = 100px>
   <md-grid-tile>
   </md-grid-tile>
 
@@ -15,8 +15,25 @@
     <md-grid-tile>{{period}}</md-grid-tile>
 
     <md-grid-tile
-      *ngFor = "let day of schedule.sortedDays">
-      {{schedule.getContent(day,period) | json}}
+      *ngFor = "let day of schedule.sortedDays"
+      (click) = "addContent($event, day,period)">
+      <div
+        class = period-content
+        (click) = "editContent($event, content)"
+        *ngIf = "schedule.getContent(day,period) as content"
+        [ngClass]="{'period-content--empty': !content.label}"
+        fxLayout=column
+        fxLayoutAlign="space-between center">
+        <span class=label>
+          {{content.label || 'No title'}}
+        </span>
+
+        <md-icon
+          class = delete
+          (click) = "deleteContent($event, content)">
+          delete
+        </md-icon>
+      </div>
     </md-grid-tile>
   </div>
 </md-grid-list>

@@ -7,11 +7,9 @@
     </md-card-title>
 
     <md-card-content>
-      <app-schedule-selector
-        [(schedule)] = schedule>
+      <app-schedule-selector>
       </app-schedule-selector>
-      <app-schedule
-        [schedule] = schedule>
+      <app-schedule>
       </app-schedule>
     </md-card-content>
   </md-card>
@@ -22,15 +20,14 @@
     fxLayoutAlign = "end center"
     fxLayoutGap = 1em>
     <button
-      md-raised-button
-      (click)="onClick">
+      md-raised-button>
       Cancel
     </button>
     
     <button
       md-raised-button
       color = primary
-      (click)="onClick">
+      (click) = saveSchedule()>
       Save
     </button>
   </div>
@@ -38,12 +35,12 @@
   
   <md-card>
     <md-card-title>
-      Schedule configuration
+      Schedule saved configuration
     </md-card-title>
 
     <md-card-content>
       <pre>
-        {{schedule | json}}
+        {{schedule$ | async | json}}
       </pre>
     </md-card-content>
   </md-card>

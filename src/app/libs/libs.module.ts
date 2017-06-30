@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  MdGridListModule,
-  MdSelectModule,
-  MdCardModule,
   MdButtonModule,
-  MdInputModule
+  MdCardModule,
+  MdDialogModule,
+  MdIconModule,
+  MdGridListModule,
+  MdInputModule,
+  MdSelectModule,
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -13,11 +15,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 @NgModule({
   imports: [
     CommonModule,
-    MdGridListModule,
     MdButtonModule,
-    MdSelectModule,
-    MdInputModule,
     MdCardModule,
+    MdDialogModule,
+    MdIconModule,
+    MdGridListModule,
+    MdInputModule,
+    MdSelectModule,
     ReactiveFormsModule,
     FlexLayoutModule
   ],
@@ -25,10 +29,12 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   exports: [
     ReactiveFormsModule,
     MdGridListModule,
-    MdCardModule,
     MdButtonModule,
-    MdSelectModule,
+    MdCardModule,
+    MdDialogModule,
+    MdIconModule,
     MdInputModule,
+    MdSelectModule,
     FlexLayoutModule
   ]
 })
