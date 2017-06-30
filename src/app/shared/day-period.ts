@@ -7,6 +7,16 @@ export class DayPeriod {
   ];
 
   static getSortedPeriods(firstPeriod, numPeriods) {
-    return DayPeriod.periods.slice(firstPeriod, firstPeriod + numPeriods);
+    return Array.from(Array(DayPeriod.periods.length * 2).keys())
+      .slice(firstPeriod, firstPeriod + numPeriods)
+      .map(day => {
+        day = day % DayPeriod.periods.length;
+
+        return {
+          key: day,
+          value: DayPeriod.periods[day]
+        }
+      });
+
   }
 }

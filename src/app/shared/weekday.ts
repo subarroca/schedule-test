@@ -10,6 +10,16 @@ export class Weekday {
   ];
 
   static getSortedDays(firstDay) {
-    return Weekday.days.slice(firstDay).concat(Weekday.days.slice(0, firstDay));
+    return Array.from(Array(Weekday.days.length * 2).keys())
+      .slice(firstDay, firstDay + Weekday.days.length)
+      .map(day => {
+        day = day % Weekday.days.length;
+
+        return {
+          key: day,
+          value: Weekday.days[day]
+        }
+      });
+
   }
 }

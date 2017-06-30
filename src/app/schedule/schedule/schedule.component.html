@@ -7,20 +7,20 @@
   <!--days-->
   <md-grid-tile
     *ngFor = "let day of schedule.sortedDays">
-    {{ day }}
+    {{ day.value }}
   </md-grid-tile>
 
   <div
     *ngFor = "let period of schedule.sortedPeriods">
-    <md-grid-tile>{{period}}</md-grid-tile>
+    <md-grid-tile>{{period.value}}</md-grid-tile>
 
     <md-grid-tile
       *ngFor = "let day of schedule.sortedDays"
-      (click) = "addContent($event, day,period)">
+      (click) = "addContent($event, day.key,period.key)">
       <div
         class = period-content
         (click) = "editContent($event, content)"
-        *ngIf = "schedule.getContent(day,period) as content"
+        *ngIf = "schedule.getContent(day.key,period.key) as content"
         [ngClass]="{'period-content--empty': !content.label}"
         fxLayout=column
         fxLayoutAlign="space-between center">
