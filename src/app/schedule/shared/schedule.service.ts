@@ -17,6 +17,16 @@ export class ScheduleService {
     this.localScheduleSubject.next(schedule);
   }
 
+  updateSettings(schedule) {
+    this.localSchedule$
+      .first()
+      .subscribe(
+      oldSchedule => {
+        oldSchedule.update(schedule);
+        this.localScheduleSubject.next(oldSchedule)
+      });
+  }
+
   save() {
     // make a copy so they don't get coupled
     this.localSchedule$

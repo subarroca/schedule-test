@@ -23,13 +23,24 @@ export class Schedule {
     comment?: string,
     periodContents?: SchedulePeriodContent[]
   } = {}) {
-    this.firstDay = options.firstDay || 0;
-    this.numDays = options.numDays || Weekday.days.length;
-    this.firstPeriod = options.firstPeriod || 0;
-    this.numPeriods = options.numPeriods || DayPeriod.periods.length;
-    this.comment = options.comment;
+    this.update(options);
+  }
 
-    this.periodContents = options.periodContents || [];
+  update(options: {
+    firstDay?: number,
+    numDays?: number,
+    firstPeriod?: number,
+    numPeriods?: number,
+    comment?: string,
+    periodContents?: SchedulePeriodContent[]
+  } = {}) {
+    this.firstDay = options.firstDay || this.firstDay || 0;
+    this.numDays = options.numDays || this.numDays || Weekday.days.length;
+    this.firstPeriod = options.firstPeriod || this.firstPeriod || 0;
+    this.numPeriods = options.numPeriods || this.numPeriods || DayPeriod.periods.length;
+    this.comment = options.comment || this.comment;
+
+    this.periodContents = options.periodContents || this.periodContents || [];
   }
 
 

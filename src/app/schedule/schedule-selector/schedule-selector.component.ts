@@ -39,7 +39,7 @@ export class ScheduleSelectorComponent implements OnInit, OnDestroy {
     this.form$$ = this.form
       .valueChanges
       .subscribe(
-      schedule => this.scheduleService.updateLocalSchedule(new Schedule(schedule)));
+      schedule => this.scheduleService.updateSettings(schedule));
 
     this.scheduleService.localSchedule$
       .first()
