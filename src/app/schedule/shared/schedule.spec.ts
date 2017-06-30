@@ -36,8 +36,9 @@ describe('Model: Schedule:', () => {
     const schedule = new Schedule(mock1);
     const days = schedule.sortedDays;
 
-    expect(days[0]).toBe('Sunday');
-    expect(days[1]).toBe('Monday');
+    expect(days[0].key).toBe(6);
+    expect(days[0].value).toBe('Sunday');
+    expect(days[1].value).toBe('Monday');
     expect(days.length).toBe(4);
   });
 
@@ -45,7 +46,8 @@ describe('Model: Schedule:', () => {
     const schedule = new Schedule(mock1);
     const periods = schedule.sortedPeriods;
 
-    expect(periods[0]).toBe('Evening');
+    expect(periods[0].key).toBe(2);
+    expect(periods[0].value).toBe('Evening');
     expect(periods.length).toBe(1);
   });
 
@@ -68,8 +70,10 @@ describe('Model: Schedule:', () => {
   it('should return an array of numbers of days', () => {
     const schedule = new Schedule();
     const days = schedule.numDaysOptions;
+    console.log(days);
 
-    expect(days[0]).toBe(0);
+
+    expect(days[0]).toBe(1);
     expect(days.length).toBe(7);
   });
 
@@ -77,7 +81,7 @@ describe('Model: Schedule:', () => {
     const schedule = new Schedule();
     const periods = schedule.numPeriodsOptions;
 
-    expect(periods[0]).toBe(0);
+    expect(periods[0]).toBe(1);
     expect(periods.length).toBe(3);
   });
 

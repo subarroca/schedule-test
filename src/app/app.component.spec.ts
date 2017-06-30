@@ -3,6 +3,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { LibsModule } from 'app/libs/libs.module';
 import { ScheduleModule } from 'app/schedule/schedule.module';
+import { ScheduleService } from 'app/schedule/shared/schedule.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -14,6 +15,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [
+        ScheduleService
+      ]
     }).compileComponents();
   }));
 

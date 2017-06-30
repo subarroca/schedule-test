@@ -3,6 +3,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ScheduleSelectorComponent } from './schedule-selector.component';
 import { LibsModule } from 'app/libs/libs.module';
+import { ScheduleService } from 'app/schedule/shared/schedule.service';
 
 describe('ScheduleSelectorComponent', () => {
   let component: ScheduleSelectorComponent;
@@ -14,7 +15,8 @@ describe('ScheduleSelectorComponent', () => {
         LibsModule,
         NoopAnimationsModule
       ],
-      declarations: [ScheduleSelectorComponent]
+      declarations: [ScheduleSelectorComponent],
+      providers: [ScheduleService]
     })
       .compileComponents();
   }));
