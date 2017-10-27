@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScheduleContentComponent } from './schedule-content.component';
 
-// TODO: See what happens with MdDialogRef
+// TODO: See what happens with MatDialogRef
 xdescribe('ScheduleContentComponent', () => {
   let component: ScheduleContentComponent;
   let fixture: ComponentFixture<ScheduleContentComponent>;

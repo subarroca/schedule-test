@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MdDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material';
 import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
@@ -13,7 +13,7 @@ export class ScheduleContentComponent implements OnInit {
   })
 
   constructor(
-    public dialogRef: MdDialogRef<ScheduleContentComponent>
+    public dialogRef: MatDialogRef<ScheduleContentComponent>
   ) { }
 
   ngOnInit() {

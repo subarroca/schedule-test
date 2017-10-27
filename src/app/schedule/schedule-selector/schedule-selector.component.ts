@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 import { Subscription } from 'rxjs/Subscription';
 
+import 'rxjs/add/operator/first';
 import { Weekday } from 'app/shared/weekday';
 import { DayPeriod } from 'app/shared/day-period';
 import { Schedule } from 'app/schedule/shared/schedule';

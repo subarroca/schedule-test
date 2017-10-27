@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 import { Subscription } from 'rxjs/Subscription';
 
@@ -9,6 +9,7 @@ import { Schedule } from 'app/schedule/shared/schedule';
 import { SchedulePeriodContent } from 'app/schedule/shared/schedule-period-content';
 import { ScheduleContentComponent } from 'app/schedule/schedule-content/schedule-content.component';
 import { ScheduleService } from 'app/schedule/shared/schedule.service';
+import 'rxjs/add/operator/first';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   schedule$$: Subscription;
 
   constructor(
-    public dialog: MdDialog,
+    public dialog: MatDialog,
     private scheduleService: ScheduleService
   ) { }
 

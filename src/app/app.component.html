@@ -1,18 +1,18 @@
 <div
   class = main-content>
 
-  <md-card>
-    <md-card-title>
+  <mat-card>
+    <mat-card-title>
       Edit school schedule
-    </md-card-title>
+    </mat-card-title>
 
-    <md-card-content>
+    <mat-card-content>
       <app-schedule-selector>
       </app-schedule-selector>
       <app-schedule>
       </app-schedule>
-    </md-card-content>
-  </md-card>
+    </mat-card-content>
+  </mat-card>
 
   <div
     class = form-actions
@@ -20,12 +20,12 @@
     fxLayoutAlign = "end center"
     fxLayoutGap = 1em>
     <button
-      md-raised-button>
+      mat-raised-button>
       Cancel
     </button>
     
     <button
-      md-raised-button
+      mat-raised-button
       color = primary
       (click) = saveSchedule()>
       Save
@@ -33,15 +33,15 @@
   </div>
 
   
-  <md-card>
-    <md-card-title>
+  <mat-card>
+    <mat-card-title>
       Schedule saved configuration
-    </md-card-title>
+    </mat-card-title>
 
-    <md-card-content>
+    <mat-card-content>
       <pre>
         {{schedule$ | async | json}}
       </pre>
-    </md-card-content>
-  </md-card>
+    </mat-card-content>
+  </mat-card>
 </div>

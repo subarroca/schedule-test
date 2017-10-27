@@ -1,20 +1,20 @@
-<md-grid-list
+<mat-grid-list
   [cols] = "schedule.numDays+1"
   rowHeight = 100px>
-  <md-grid-tile>
-  </md-grid-tile>
+  <mat-grid-tile>
+  </mat-grid-tile>
 
   <!--days-->
-  <md-grid-tile
+  <mat-grid-tile
     *ngFor = "let day of schedule.sortedDays">
     {{ day.value }}
-  </md-grid-tile>
+  </mat-grid-tile>
 
   <div
     *ngFor = "let period of schedule.sortedPeriods">
-    <md-grid-tile>{{period.value}}</md-grid-tile>
+    <mat-grid-tile>{{period.value}}</mat-grid-tile>
 
-    <md-grid-tile
+    <mat-grid-tile
       *ngFor = "let day of schedule.sortedDays"
       (click) = "addContent($event, day.key,period.key)">
       <div
@@ -28,12 +28,12 @@
           {{content.label || 'No title'}}
         </span>
 
-        <md-icon
+        <mat-icon
           class = delete
           (click) = "deleteContent($event, content)">
           delete
-        </md-icon>
+        </mat-icon>
       </div>
-    </md-grid-tile>
+    </mat-grid-tile>
   </div>
-</md-grid-list>
+</mat-grid-list>

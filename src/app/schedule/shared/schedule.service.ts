@@ -3,6 +3,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Schedule } from 'app/schedule/shared/schedule';
 import { Observable } from 'rxjs/Observable';
 
+import 'rxjs/add/operator/first';
+
 @Injectable()
 export class ScheduleService {
   localScheduleSubject: BehaviorSubject<Schedule> = new BehaviorSubject<Schedule>(new Schedule());
