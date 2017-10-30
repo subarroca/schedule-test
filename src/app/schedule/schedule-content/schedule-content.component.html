@@ -1,19 +1,18 @@
-<mat-dialog-content>
-  <form
-    [formGroup] = form
-    (ngSubmit)="save()" >
-    <mat-input-container
-      fxFlex>
-      <input
-        type = text
-        matInput
-        formControlName = label
-        placeholder = Title>
-    </mat-input-container>
-  </form>
-</mat-dialog-content>
-
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button (click)=save()>Save</button>
-</mat-dialog-actions>
+<div
+  class="cell content"
+  [class.content--highlight] = "content.highlight"
+  [class.content--empty] = "!content.label"
+  (click)="edit($event)"
+  *ngIf="content"
+  fxLayout="column"
+  fxLayoutAlign="space-between center"
+>
+  {{content.label || 'No title'}}
+</div>
+<div
+  class="cell placeholder"
+  *ngIf="!content">
+  <mat-icon>
+    add
+  </mat-icon>
+</div>

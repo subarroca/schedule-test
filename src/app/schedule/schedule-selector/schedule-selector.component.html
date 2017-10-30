@@ -5,57 +5,83 @@
   <div
     fxLayout = row
     fxLayoutGap = 2%>
-    <mat-select
-      fxFlex = 24
-      formControlName = firstDay
-      placeholder = "First day">
-        <mat-option
-          *ngFor = "let day of schedule.days; let i = index"
-          [value] = i>
-          {{day}}
-        </mat-option>
-    </mat-select>
+    <mat-form-field
+      floatPlaceholder = 'auto'>
+      <mat-select
+        formControlName = firstDay>
+          <mat-option
+            *ngFor = "let day of schedule.days; let i = index"
+            [value] = i>
+            {{day}}
+          </mat-option>
+      </mat-select>
+      <mat-placeholder>First day</mat-placeholder>
+    </mat-form-field>
     
-    <mat-select
-      fxFlex = 23
-      formControlName = numDays
-      placeholder = "Number of days">
-        <mat-option
-          *ngFor = "let num of schedule.numDaysOptions"
-          [value] = num>
-          {{num}}
-        </mat-option>
-    </mat-select>
+    <div>
+      <button
+        mat-icon-button
+        (click)="decreaseDays()"
+        [disabled] = !schedule.canDecreaseDays
+      >
+        <mat-icon>
+          remove
+        </mat-icon>
+        </button>
+        <mat-form-field fxFlex>
+          <input
+            type="text"
+            matInput
+            formControlName="numDays"
+            placeholder="Num days"
+          >
+        </mat-form-field>
+        <button
+          mat-icon-button
+          (click)="increaseDays()"
+          [disabled] = !schedule.canIncreaseDays
+        >
+          <mat-icon>
+            add
+          </mat-icon>
+          </button>
+    </div>
     
-    <mat-select
-      fxFlex = 23
-      formControlName = numPeriods
-      placeholder = "Number of periods">
-        <mat-option
-          *ngFor = "let num of schedule.numPeriodsOptions"
-          [value] = num>
-          {{num}}
-        </mat-option>
-    </mat-select>
-    
-    <mat-select
-      fxFlex = 24
-      formControlName = firstPeriod
-      placeholder = "First period">
-        <mat-option
-          *ngFor = "let period of schedule.periods; let i = index"
-          [value] = i>
-          {{period}}
-        </mat-option>
-    </mat-select>
+    <div>
+      <button
+        mat-icon-button
+        (click)="decreasePeriods()"
+        [disabled] = !schedule.canDecreasePeriods>
+          <mat-icon>
+            remove
+          </mat-icon>
+      </button>
+      <mat-form-field
+        fxFlex>
+        <input
+          type="text"
+          matInput
+          formControlName="numPeriods"
+          placeholder="Num periods"
+        >
+      </mat-form-field>
+      <button
+        mat-icon-button
+        (click)="increasePeriods()"
+        [disabled] = !schedule.canIncreasePeriods>
+          <mat-icon>
+            add
+          </mat-icon>
+      </button>
+    </div>
   </div>
   
-  <mat-input-container
+  <mat-form-field
     fxFlex>
-    <input
-      type = text
+    <textarea
       matInput
       formControlName = comment
       placeholder = Comment>
-  </mat-input-container>
+    </textarea>
+  </mat-form-field>
 </form>

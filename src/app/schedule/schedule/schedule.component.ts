@@ -1,15 +1,21 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatDialog } from '@angular/material';
-
-import { Subscription } from 'rxjs/Subscription';
-
-import { Weekday } from 'app/shared/weekday';
-import { DayPeriod } from 'app/shared/day-period';
-import { Schedule } from 'app/schedule/shared/schedule';
-import { SchedulePeriodContent } from 'app/schedule/shared/schedule-period-content';
-import { ScheduleContentComponent } from 'app/schedule/schedule-content/schedule-content.component';
-import { ScheduleService } from 'app/schedule/shared/schedule.service';
+import {
+  ScheduleContentDialogComponent,
+} from '../schedule-content-dialog/schedule-content-dialog.component';
 import 'rxjs/add/operator/first';
+
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import {
+  Schedule,
+} from 'app/schedule/shared/schedule';
+import {
+  ScheduleService,
+} from 'app/schedule/shared/schedule.service';
+import { Subscription } from 'rxjs/Subscription';
+import { MatDialog } from '@angular/material';
 
 
 @Component({
@@ -39,29 +45,40 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   // CONTENT EDITION
   addContent(ev: Event, day: number, period: number) {
-    this.schedule.addContent(day, period);
+    if (ev) {
+      ev.stopPropagation();
+    }
+
+    const content = this.schedule.addContent(day, period);
     this.scheduleService.updateLocalSchedule(this.schedule);
-  }
 
-  editContent(ev: Event, content: SchedulePeriodContent) {
-    ev.stopPropagation();
-
-    const dialogRef = this.dialog.open(ScheduleContentComponent)
+    const dialogRef = this.dialog.open(ScheduleContentDialogComponent, {
+      data: {
+        content: content
+      }
+    })
       .afterClosed()
       .first()
-      .subscribe(label => {
-        const newContent = new SchedulePeriodContent(content);
-        newContent.label = label;
-        this.schedule.editContent(content, newContent);
-        this.scheduleService.updateLocalSchedule(this.schedule);
+      .subscribe(operation => {
+        if (operation) {
+          switch (operation.type) {
+            case 'delete':
+              this.schedule.deleteContent(content);
+              this.scheduleService.updateLocalSchedule(this.schedule);
+              break;
+            case 'update':
+              if (operation.data.label) {
+                this.schedule.editContent(content, operation.data);
+              } else {
+                this.schedule.deleteContent(content);
+              }
+              this.scheduleService.updateLocalSchedule(this.schedule);
+              break;
+          }
+        } else {
+          this.schedule.deleteContent(content);
+          this.scheduleService.updateLocalSchedule(this.schedule);
+        }
       });
   }
-
-  deleteContent(ev: Event, content: SchedulePeriodContent) {
-    ev.stopPropagation();
-
-    this.schedule.deleteContent(content);
-    this.scheduleService.updateLocalSchedule(this.schedule);
-  }
-
 }

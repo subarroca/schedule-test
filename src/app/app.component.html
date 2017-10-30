@@ -12,25 +12,17 @@
       <app-schedule>
       </app-schedule>
     </mat-card-content>
-  </mat-card>
-
-  <div
-    class = form-actions
-    fxLayout = row
-    fxLayoutAlign = "end center"
-    fxLayoutGap = 1em>
-    <button
-      mat-raised-button>
-      Cancel
-    </button>
     
-    <button
-      mat-raised-button
-      color = primary
-      (click) = saveSchedule()>
-      Save
-    </button>
-  </div>
+    <mat-card-actions>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="saveSchedule()"
+      >
+        Save
+      </button>
+    </mat-card-actions>
+  </mat-card>
 
   
   <mat-card>

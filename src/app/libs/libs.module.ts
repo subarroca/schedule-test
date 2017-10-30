@@ -7,6 +7,7 @@ import {
   MatIconModule,
   MatGridListModule,
   MatInputModule,
+  MatCheckboxModule,
   MatSelectModule,
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,6 +18,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     CommonModule,
     MatButtonModule,
     MatCardModule,
+    MatCheckboxModule,
     MatDialogModule,
     MatIconModule,
     MatInputModule,
@@ -32,6 +34,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatGridListModule,
     MatButtonModule,
     MatCardModule,
+    MatCheckboxModule,
     MatDialogModule,
     MatIconModule,
     MatInputModule,

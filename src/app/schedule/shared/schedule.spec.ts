@@ -1,13 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Schedule } from './schedule';
-import { SchedulePeriodContent } from 'app/schedule/shared/schedule-period-content';
+import { ScheduleContent } from 'app/schedule/shared/schedule-content-dialog';
 
 describe('Model: Schedule:', () => {
   const mock1 = {
     firstDay: 6,
     numDays: 4,
-    firstPeriod: 2,
     numPeriods: 1,
     comment: 'This is a test'
   }
@@ -17,7 +16,6 @@ describe('Model: Schedule:', () => {
 
     expect(schedule.firstDay).toBe(mock1.firstDay);
     expect(schedule.numDays).toBe(mock1.numDays);
-    expect(schedule.firstPeriod).toBe(mock1.firstPeriod);
     expect(schedule.numPeriods).toBe(mock1.numPeriods);
     expect(schedule.comment).toBe(mock1.comment);
   });
@@ -27,7 +25,6 @@ describe('Model: Schedule:', () => {
 
     expect(schedule.firstDay).toBe(0);
     expect(schedule.numDays).toBe(7);
-    expect(schedule.firstPeriod).toBe(0);
     expect(schedule.numPeriods).toBe(3);
     expect(schedule.comment).toBeUndefined();
   });
@@ -40,15 +37,6 @@ describe('Model: Schedule:', () => {
     expect(days[0].value).toBe('Sunday');
     expect(days[1].value).toBe('Monday');
     expect(days.length).toBe(4);
-  });
-
-  it('should return an array of periods based on config', () => {
-    const schedule = new Schedule(mock1);
-    const periods = schedule.sortedPeriods;
-
-    expect(periods[0].key).toBe(2);
-    expect(periods[0].value).toBe('Evening');
-    expect(periods.length).toBe(1);
   });
 
   it('should return an array of all days', () => {
@@ -72,19 +60,61 @@ describe('Model: Schedule:', () => {
     const days = schedule.numDaysOptions;
     console.log(days);
 
-
     expect(days[0]).toBe(1);
     expect(days.length).toBe(7);
   });
 
-  it('should return an array of numbers of periods', () => {
+  it('should increase periods', () => {
     const schedule = new Schedule();
-    const periods = schedule.numPeriodsOptions;
+    schedule.increasePeriods();
 
-    expect(periods[0]).toBe(1);
-    expect(periods.length).toBe(3);
+    expect(schedule.numPeriods).toBe(2);
   });
 
+  it('should decrease periods', () => {
+    const schedule = new Schedule();
+    schedule.numPeriods = 3;
+    schedule.decreasePeriods();
+
+    expect(schedule.numPeriods).toBe(2);
+  });
+
+  it('should not decrease periods below 1', () => {
+    const schedule = new Schedule();
+    schedule.decreasePeriods();
+
+    expect(schedule.numPeriods).toBe(1);
+  });
+
+  it('should not increase days above 7', () => {
+    const schedule = new Schedule();
+    schedule.numDays = 7;
+    schedule.increaseDays();
+
+    expect(schedule.numDays).toBe(7);
+  });
+
+  it('should increase days', () => {
+    const schedule = new Schedule();
+    schedule.increaseDays();
+
+    expect(schedule.numDays).toBe(2);
+  });
+
+  it('should decrease days', () => {
+    const schedule = new Schedule();
+    schedule.numDays = 3;
+    schedule.decreaseDays();
+
+    expect(schedule.numDays).toBe(2);
+  });
+
+  it('should not decrease days below 1', () => {
+    const schedule = new Schedule();
+    schedule.decreaseDays();
+
+    expect(schedule.numDays).toBe(1);
+  });
 
 
 
@@ -123,7 +153,7 @@ describe('Model: Schedule:', () => {
 
     it('should not add content if already present in given period', () => {
       schedule.addContent(0, 0);
-      schedule.periodContents[0].endPeriod = 1;
+      schedule.contents[0].periodSpan = 1;
       const newContent = schedule.addContent(0, 1);
 
       expect(newContent).toBeUndefined();
@@ -133,16 +163,16 @@ describe('Model: Schedule:', () => {
       const deletedContent = schedule.deleteContent(initialContent);
 
       expect(deletedContent).toBeUndefined();
-      expect(schedule.periodContents.length).toBe(0);
+      expect(schedule.contents.length).toBe(0);
     });
 
     it('should not delete content if it does not exist', () => {
       // values are the same but objects are different
-      const newContent = new SchedulePeriodContent(initialContent);
+      const newContent = new ScheduleContent(initialContent);
       const deletedContent = schedule.deleteContent(newContent);
 
       expect(deletedContent).toBeDefined();
-      expect(schedule.periodContents.length).toBe(1);
+      expect(schedule.contents.length).toBe(1);
     });
 
     describe('Content edition:', () => {
@@ -150,9 +180,9 @@ describe('Model: Schedule:', () => {
       let updatedContent;
 
       beforeEach(() => {
-        newContent = new SchedulePeriodContent({
-          startPeriod: 0,
-          endPeriod: 1,
+        newContent = new ScheduleContent({
+          period: 0,
+          periodSpan: 1,
           day: 0,
           label: 'updated'
         });
@@ -169,8 +199,8 @@ describe('Model: Schedule:', () => {
     });
 
     it('should move content if empty', () => {
-      const newContent = new SchedulePeriodContent({
-        startPeriod: 1,
+      const newContent = new ScheduleContent({
+        period: 1,
         day: 1
       });
       const updatedContent = schedule.editContent(initialContent, newContent);
@@ -180,8 +210,8 @@ describe('Model: Schedule:', () => {
     });
 
     it('should not move content if occupied', () => {
-      const newContent = new SchedulePeriodContent({
-        startPeriod: 1,
+      const newContent = new ScheduleContent({
+        period: 1,
         day: 1,
         label: 'updated'
       });

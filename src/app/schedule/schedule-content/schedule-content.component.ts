@@ -1,6 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
-import { FormGroup, FormControl } from '@angular/forms';
+import {
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { MatDialog } from '@angular/material';
+
+import {
+  ScheduleContentDialogComponent,
+} from '../schedule-content-dialog/schedule-content-dialog.component';
+import { Schedule } from '../shared/schedule';
+import {
+  ScheduleContent,
+} from '../shared/schedule-content';
+import {
+  ScheduleService,
+} from '../shared/schedule.service';
 
 @Component({
   selector: 'app-schedule-content',
@@ -8,21 +22,40 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./schedule-content.component.scss']
 })
 export class ScheduleContentComponent implements OnInit {
-  form: FormGroup = new FormGroup({
-    label: new FormControl()
-  })
+  @Input() content: ScheduleContent;
+  @Input() schedule: Schedule;
 
   constructor(
-    public dialogRef: MatDialogRef<ScheduleContentComponent>
+    public dialog: MatDialog,
+    private scheduleService: ScheduleService
   ) { }
 
   ngOnInit() {
   }
 
+  edit(ev: Event = null) {
+    if (ev) {
+      ev.stopPropagation();
+    }
 
-  save() {
-    this.dialogRef.close(this.form.value.label)
+    const dialogRef = this.dialog.open(ScheduleContentDialogComponent, {
+      data: {
+        content: this.content
+      }
+    })
+      .afterClosed()
+      .first()
+      .subscribe(operation => {
+        switch (operation.type) {
+          case 'delete':
+            this.schedule.deleteContent(this.content);
+            this.scheduleService.updateLocalSchedule(this.schedule);
+            break;
+          case 'update':
+            this.schedule.editContent(this.content, operation.data);
+            this.scheduleService.updateLocalSchedule(this.schedule);
+            break;
+        }
+      });
   }
-
-
 }

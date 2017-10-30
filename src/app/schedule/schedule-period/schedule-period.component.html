@@ -1,0 +1,9 @@
+<div *ngIf=period?.from?.h>
+  {{ period?.from?.h }} {{period?.from?.m}}
+</div>
+<div *ngIf=period?.to>
+  {{ period?.to?.h }} {{period?.to?.m}}
+</div>
+<div *ngIf="!period?.from?.h">
+  HH:mm
+</div>

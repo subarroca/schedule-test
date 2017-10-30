@@ -1,0 +1,39 @@
+<mat-dialog-content>
+  <form
+    [formGroup] = form
+    (ngSubmit)="save()" >
+    <div>      
+      <mat-form-field
+        fxFlex>
+        <input
+          type = "time"
+          matInput
+          formControlName = "from"
+          placeholder = "from (hh:mm)">
+      </mat-form-field>
+  
+      <mat-form-field fxFlex>
+        <input
+          type = "time"
+          matInput
+          formControlName="to"
+          placeholder="to (hh:mm)"
+        >
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+    mat-raised-button
+    color = primary
+    (click)=save()>
+    Save
+  </button>
+  <button
+    mat-button
+    mat-dialog-close>
+    Cancel
+  </button>
+</mat-dialog-actions>
