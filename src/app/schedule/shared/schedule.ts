@@ -13,8 +13,11 @@ export class Schedule {
   numPeriods: number;
   comment: string;
   contents: ScheduleContent[];
+
+  // parse before exporting
   periods: SchedulePeriod[] = [];
   visiblePeriods: SchedulePeriod[];
+  sortedDays: { key: number, value: string }[];
 
 
   constructor(options: {
@@ -39,12 +42,14 @@ export class Schedule {
     this.firstDay = options.firstDay || this.firstDay || 0;
     this.numDays = options.numDays || this.numDays || Weekday.days.length;
     this.numPeriods = options.numPeriods || this.numPeriods || 1;
+
     this.comment = options.comment || this.comment;
 
     this.contents = options.contents || this.contents || [];
     this.periods = options.periods || this.periods || [];
 
     this.updateVisiblePeriods();
+    this.sortedDays = this.sortDays();
   }
 
 
@@ -125,9 +130,11 @@ export class Schedule {
 
   decreaseDays() {
     this.numDays = Math.max(1, this.numDays - 1);
+    this.sortedDays = this.sortDays();
   }
   increaseDays() {
     this.numDays = Math.min(this.days.length, this.numDays + 1);
+    this.sortedDays = this.sortDays();
   }
   decreasePeriods() {
     this.numPeriods = Math.max(1, this.numPeriods - 1);
@@ -153,8 +160,8 @@ export class Schedule {
 
 
 
-  // GETTERS FOR DISPLAY
-  get sortedDays() {
+  // Don't use a getter or drag and drop will break
+  sortDays() {
     return Weekday.getSortedDays(this.firstDay).slice(0, this.numDays);
   }
 

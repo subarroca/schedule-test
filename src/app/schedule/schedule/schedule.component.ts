@@ -1,4 +1,7 @@
 import {
+  ScheduleContent,
+} from '../shared/schedule-content';
+import {
   ScheduleContentDialogComponent,
 } from '../schedule-content-dialog/schedule-content-dialog.component';
 import 'rxjs/add/operator/first';
@@ -24,6 +27,7 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./schedule.component.scss']
 })
 export class ScheduleComponent implements OnInit, OnDestroy {
+  draggingContent: ScheduleContent;
   schedule: Schedule;
   schedule$$: Subscription;
 
@@ -42,43 +46,23 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     }
   }
 
+  onDrop(ev, dayId: number, periodId: number) {
+    console.log(ev, dayId, periodId);
 
-  // CONTENT EDITION
-  addContent(ev: Event, day: number, period: number) {
-    if (ev) {
-      ev.stopPropagation();
+    ev.dragData.update({
+      day: dayId,
+      period: periodId
+    });
+    this.draggingContent = null;
+  }
+
+  startDragging(content: ScheduleContent) {
+    this.draggingContent = content;
+  }
+
+  isDraggingZone(dayId, periodId) {
+    if (this.draggingContent) {
+      return (this.draggingContent.day === dayId && this.draggingContent.period === periodId);
     }
-
-    const content = this.schedule.addContent(day, period);
-    this.scheduleService.updateLocalSchedule(this.schedule);
-
-    const dialogRef = this.dialog.open(ScheduleContentDialogComponent, {
-      data: {
-        content: content
-      }
-    })
-      .afterClosed()
-      .first()
-      .subscribe(operation => {
-        if (operation) {
-          switch (operation.type) {
-            case 'delete':
-              this.schedule.deleteContent(content);
-              this.scheduleService.updateLocalSchedule(this.schedule);
-              break;
-            case 'update':
-              if (operation.data.label) {
-                this.schedule.editContent(content, operation.data);
-              } else {
-                this.schedule.deleteContent(content);
-              }
-              this.scheduleService.updateLocalSchedule(this.schedule);
-              break;
-          }
-        } else {
-          this.schedule.deleteContent(content);
-          this.scheduleService.updateLocalSchedule(this.schedule);
-        }
-      });
   }
 }

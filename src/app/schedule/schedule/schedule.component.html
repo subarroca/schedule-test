@@ -1,11 +1,14 @@
 <mat-grid-list
   [cols] = "schedule.numDays+1"
-  rowHeight = 60px>
+  rowHeight = "60px"
+  [class.dragging] = "!!draggingContent">
   <mat-grid-tile>
   </mat-grid-tile>
 
   <!--days-->
   <mat-grid-tile
+    dnd-draggable
+    [dragEnabled]="true"
     *ngFor = "let day of schedule.sortedDays">
     {{ day.value }}
   </mat-grid-tile>
@@ -21,12 +24,24 @@
     </mat-grid-tile>
 
     <mat-grid-tile
-      *ngFor = "let day of schedule.sortedDays"
-      (click) = "addContent($event, day.key,i)">
+      *ngFor = "let day of schedule.sortedDays">
       <app-schedule-content
+        dnd-draggable
+        [dragEnabled]="true"
+        [dragData]="schedule.getContent(day.key,i)"
+        [day]="day.key"
+        (onDragStart) = "startDragging(schedule.getContent(day.key,i))"
+        [period] = "i"
         [schedule] = "schedule"
         [content] = "schedule.getContent(day.key,i)">
       </app-schedule-content>
+      <div
+        class="drop-zone"
+        [class.disabled] = "isDraggingZone(day.key,i)"
+        dnd-droppable
+        (onDropSuccess)="onDrop($event, day.key,i)">
+      </div>
     </mat-grid-tile>
   </div>
 </mat-grid-list>
+

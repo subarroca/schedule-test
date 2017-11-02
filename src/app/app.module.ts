@@ -1,12 +1,20 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import {
+  BrowserModule,
+} from '@angular/platform-browser';
+import {
+  BrowserAnimationsModule,
+} from '@angular/platform-browser/animations';
+import { LibsModule } from 'app/libs/libs.module';
+import {
+  ScheduleModule,
+} from 'app/schedule/schedule.module';
+import {
+  ScheduleService,
+} from 'app/schedule/shared/schedule.service';
+import { DndModule } from 'ng2-dnd';
 
 import { AppComponent } from './app.component';
-import { ScheduleModule } from 'app/schedule/schedule.module';
-import { LibsModule } from 'app/libs/libs.module';
-import { ScheduleService } from 'app/schedule/shared/schedule.service';
 
 @NgModule({
   declarations: [
@@ -15,6 +23,7 @@ import { ScheduleService } from 'app/schedule/shared/schedule.service';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    DndModule.forRoot(),
 
     ScheduleModule,
     LibsModule

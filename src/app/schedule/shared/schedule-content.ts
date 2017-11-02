@@ -28,10 +28,10 @@ export class ScheduleContent {
     icon?: string,
     highlight?: boolean
   } = {}) {
-    this.period = options.period || this.period;
-    this.periodSpan = options.periodSpan || this.periodSpan;
-    this.day = options.day || this.day;
-    this.daySpan = options.daySpan || this.daySpan;
+    this.period = (options.period !== undefined) ? options.period : this.period;
+    this.periodSpan = options.periodSpan || this.periodSpan || 1;
+    this.day = (options.day !== undefined) ? options.day : this.day;
+    this.daySpan = options.daySpan || this.daySpan || 1;
     this.label = options.label || this.label;
     this.icon = options.icon || this.icon;
     this.highlight = options.highlight || this.highlight;

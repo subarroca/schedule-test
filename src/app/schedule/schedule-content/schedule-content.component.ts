@@ -23,6 +23,8 @@ import {
 })
 export class ScheduleContentComponent implements OnInit {
   @Input() content: ScheduleContent;
+  @Input() period: number;
+  @Input() day: number;
   @Input() schedule: Schedule;
 
   constructor(
@@ -33,7 +35,7 @@ export class ScheduleContentComponent implements OnInit {
   ngOnInit() {
   }
 
-  edit(ev: Event = null) {
+  edit(ev: Event = null, isNew = false) {
     if (ev) {
       ev.stopPropagation();
     }
@@ -46,16 +48,36 @@ export class ScheduleContentComponent implements OnInit {
       .afterClosed()
       .first()
       .subscribe(operation => {
-        switch (operation.type) {
-          case 'delete':
-            this.schedule.deleteContent(this.content);
-            this.scheduleService.updateLocalSchedule(this.schedule);
-            break;
-          case 'update':
-            this.schedule.editContent(this.content, operation.data);
-            this.scheduleService.updateLocalSchedule(this.schedule);
-            break;
+        if (operation) {
+          switch (operation.type) {
+            case 'delete':
+              this.schedule.deleteContent(this.content);
+              this.scheduleService.updateLocalSchedule(this.schedule);
+              break;
+            case 'update':
+              this.update(this.content, operation.data, isNew)
+              break;
+          }
         }
       });
+  }
+
+  add(ev: Event) {
+    if (ev) {
+      ev.stopPropagation();
+    }
+
+    this.content = this.schedule.addContent(this.day, this.period);
+
+    this.edit(ev, true);
+  }
+
+  update(oldContent, newContent, isNew) {
+    if (!newContent.label && isNew) {
+      this.schedule.deleteContent(this.content);
+    } else {
+      this.schedule.editContent(this.content, newContent);
+    }
+    this.scheduleService.updateLocalSchedule(this.schedule);
   }
 }
