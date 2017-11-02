@@ -11,7 +11,7 @@ import {
   MatSelectModule,
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
+// import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   imports: [
@@ -26,7 +26,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    // FlexLayoutModule
   ],
   declarations: [],
   exports: [
@@ -39,7 +39,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
-    FlexLayoutModule
+    // FlexLayoutModule
   ]
 })
 export class LibsModule { }
