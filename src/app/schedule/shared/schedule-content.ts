@@ -7,6 +7,9 @@ export class ScheduleContent {
   icon: string;
   highlight: boolean;
 
+  occupied: boolean;
+  empty: boolean;
+
   constructor(options: {
     period?: number,
     periodSpan?: number,
@@ -14,7 +17,9 @@ export class ScheduleContent {
     daySpan?: number,
     label?: string,
     icon?: string,
-    highlight?: boolean
+    highlight?: boolean,
+    occupied?: boolean,
+    empty?: boolean
   } = {}) {
     this.update(options);
   }
@@ -26,7 +31,9 @@ export class ScheduleContent {
     daySpan?: number,
     label?: string,
     icon?: string,
-    highlight?: boolean
+    highlight?: boolean,
+    occupied?: boolean,
+    empty?: boolean
   } = {}) {
     this.period = (options.period !== undefined) ? options.period : this.period;
     this.periodSpan = options.periodSpan || this.periodSpan || 1;
@@ -35,6 +42,14 @@ export class ScheduleContent {
     this.label = options.label || this.label;
     this.icon = options.icon || this.icon;
     this.highlight = options.highlight || this.highlight;
+
+    if (this.label && this.label.length) {
+      options.empty = false;
+      options.occupied = true;
+    }
+
+    this.occupied = !!(options.occupied !== undefined ? options.occupied : this.occupied);
+    this.empty = (options.empty !== undefined ? options.empty : this.empty) !== false;
   }
 
   overlaps(other: ScheduleContent) {

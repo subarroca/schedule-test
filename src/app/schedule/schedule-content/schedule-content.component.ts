@@ -23,8 +23,6 @@ import {
 })
 export class ScheduleContentComponent implements OnInit {
   @Input() content: ScheduleContent;
-  @Input() period: number;
-  @Input() day: number;
   @Input() schedule: Schedule;
 
   constructor(
@@ -60,16 +58,6 @@ export class ScheduleContentComponent implements OnInit {
           }
         }
       });
-  }
-
-  add(ev: Event) {
-    if (ev) {
-      ev.stopPropagation();
-    }
-
-    this.content = this.schedule.addContent(this.day, this.period);
-
-    this.edit(ev, true);
   }
 
   update(oldContent, newContent, isNew) {

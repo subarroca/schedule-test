@@ -1,3 +1,5 @@
+@import 'src/assets/colors';
+
 .drop-zone{
   transition: background .5s;
   background: transparent;
@@ -6,12 +8,12 @@
   position: absolute;
   z-index: 1;
 
-  .dragging &:not(.disabled){
-    background: #eee;
+  .visible-grid &:not(.disabled){
+    border: 1px solid $champagne;
     z-index: 3;
 
     &.dnd-drag-over{
-      background: mix(#eee,tomato);
+      background: $gray65;
     }
   }  
 }
@@ -20,4 +22,8 @@
 app-schedule-content{
   position: relative;
   z-index: 2;
+}
+
+.resize-ghost-element{
+  z-index: 4;
 }

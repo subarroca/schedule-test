@@ -13,6 +13,8 @@ import {
 import { ReactiveFormsModule } from '@angular/forms';
 // import { FlexLayoutModule } from '@angular/flex-layout';
 import { DndModule } from 'ng2-dnd';
+import { ResizableModule } from 'angular-resizable-element';
+
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { DndModule } from 'ng2-dnd';
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
-    DndModule
+    DndModule,
+    ResizableModule
     // FlexLayoutModule
   ],
   declarations: [],
@@ -43,7 +46,8 @@ import { DndModule } from 'ng2-dnd';
     MatInputModule,
     MatSelectModule,
     // FlexLayoutModule,
-    DndModule
+    DndModule,
+    ResizableModule
   ]
 })
 export class LibsModule { }

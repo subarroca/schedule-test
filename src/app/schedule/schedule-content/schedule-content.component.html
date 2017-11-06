@@ -3,16 +3,25 @@
   [class.content--highlight] = "content.highlight"
   [class.content--empty] = "!content.label"
   (click)="edit($event)"
-  *ngIf="content"
+  *ngIf="!content.empty"
   fxLayout="column"
   fxLayoutAlign="space-between center"
 >
   {{content.label || 'No title'}}
+
+  <div
+    class="drag-handle"
+    dnd-draggable-handle>
+    <mat-icon>
+      open_with
+    </mat-icon>
+  </div>
 </div>
+
 <div
   class="cell placeholder"
-  *ngIf="!content"
-  (click) = "add($event)">
+  *ngIf="content.empty"
+  (click) = "edit($event)">
   <mat-icon>
     add
   </mat-icon>

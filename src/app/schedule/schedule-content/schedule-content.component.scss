@@ -1,7 +1,26 @@
+@import 'src/assets/colors';
+
 :host{
   width: 100%;
   height: 100%;
   display: flex;
+
+  &:hover{
+    .drag-handle{
+      opacity: 1;
+    }
+  }
+}
+
+.drag-handle{
+  transition: opacity .5s;
+  color: $champagne;
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  opacity: 0;
 }
 
 .cell{
@@ -9,31 +28,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   border-radius: 2px;
   padding: 1em;
+  border: 2px solid $white;
 }
 
 .content{
-  color: tomato;
-  background: white;
-  border: 1px solid tomato;
+  transition: box-shadow 0.5s;
+  color: $black;
+  background: rgba($champagne,.2);
   
   &--empty{
-    opacity: 0.5;
+    color: $champagne;
   }
   
   &--highlight{
-    background: tomato;
-    color: white;
+    background: rgba($champagne,.4);
+  }
+
+  &:hover{
+    box-shadow: -5px -5px 0 rgba($champagne,.4) inset;
   }
 }
 
 .placeholder{
-  background: #ddd;
+  color: $champagne;
   opacity: 0;
-
+  
   &:hover{
-    opacity: 1;
+    :host-context(.allow-new) &{
+      opacity: 1;
+    }
   }
 }
