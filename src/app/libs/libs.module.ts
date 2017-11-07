@@ -1,20 +1,27 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import {
+  FlexLayoutModule,
+} from '@angular/flex-layout';
+import {
+  ReactiveFormsModule,
+} from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
-  MatDialogModule,
-  MatIconModule,
-  MatGridListModule,
-  MatInputModule,
   MatCheckboxModule,
+  MatDialogModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
   MatSelectModule,
 } from '@angular/material';
-import { ReactiveFormsModule } from '@angular/forms';
-// import { FlexLayoutModule } from '@angular/flex-layout';
+import {
+  ResizableModule,
+} from 'angular-resizable-element';
 import { DndModule } from 'ng2-dnd';
-import { ResizableModule } from 'angular-resizable-element';
 
+// import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
@@ -31,8 +38,8 @@ import { ResizableModule } from 'angular-resizable-element';
     MatSelectModule,
     ReactiveFormsModule,
     DndModule,
-    ResizableModule
-    // FlexLayoutModule
+    ResizableModule,
+    FlexLayoutModule
   ],
   declarations: [],
   exports: [
@@ -45,7 +52,7 @@ import { ResizableModule } from 'angular-resizable-element';
     MatIconModule,
     MatInputModule,
     MatSelectModule,
-    // FlexLayoutModule,
+    FlexLayoutModule,
     DndModule,
     ResizableModule
   ]

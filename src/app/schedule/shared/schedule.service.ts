@@ -1,3 +1,9 @@
+import {
+  SchedulePeriod,
+} from './schedule-period';
+import {
+  ScheduleContent,
+} from './schedule-content';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Schedule } from 'app/schedule/shared/schedule';
@@ -15,27 +21,31 @@ export class ScheduleService {
 
   constructor() { }
 
-  updateLocalSchedule(schedule) {
+  updateContent(contentId: string, newContent: ScheduleContent) {
+    const schedule = this.localScheduleSubject.getValue();
+    schedule.updateContent(contentId, newContent);
     this.localScheduleSubject.next(schedule);
   }
-
-  updateSettings(schedule) {
-    this.localSchedule$
-      .first()
-      .subscribe(
-      oldSchedule => {
-        oldSchedule.update(schedule);
-        this.localScheduleSubject.next(oldSchedule)
-      });
+  deleteContent(content: ScheduleContent) {
+    const schedule = this.localScheduleSubject.getValue();
+    schedule.deleteContent(content);
+    this.localScheduleSubject.next(schedule);
+  }
+  updatePeriod(periodId: number, period: SchedulePeriod) {
+    const schedule = this.localScheduleSubject.getValue();
+    schedule.updatePeriod(periodId, period);
+    this.localScheduleSubject.next(schedule);
+  }
+  updateSettings(schedule: Schedule) {
+    const oldSchedule = this.localScheduleSubject.getValue();
+    oldSchedule.update(schedule);
+    this.localScheduleSubject.next(oldSchedule);
   }
 
   save() {
     // make a copy so they don't get coupled
-    this.localSchedule$
-      .first()
-      .subscribe(
-      schedule => this.savedScheduleSubject.next(new Schedule(schedule))
-      );
+    const schedule = this.localScheduleSubject.getValue();
+    this.savedScheduleSubject.next(schedule.getCopy())
   }
 
 }

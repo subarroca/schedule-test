@@ -48,8 +48,7 @@ export class SchedulePeriodComponent implements OnInit {
       .afterClosed()
       .first()
       .subscribe((newPeriod: SchedulePeriod) => {
-        this.schedule.editPeriod(this.id, newPeriod);
-        this.scheduleService.updateLocalSchedule(this.schedule);
+        this.scheduleService.updatePeriod(this.id, newPeriod);
       });
   }
 

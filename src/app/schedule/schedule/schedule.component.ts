@@ -27,6 +27,7 @@ import { MatDialog } from '@angular/material';
   styleUrls: ['./schedule.component.scss']
 })
 export class ScheduleComponent implements OnInit, OnDestroy {
+  droppableZones: boolean[][];
   cellSize: { width: number; height: number; };
   resizingContent: ScheduleContent;
   draggingContent: ScheduleContent;
@@ -59,31 +60,31 @@ export class ScheduleComponent implements OnInit, OnDestroy {
 
   startDragging(content: ScheduleContent) {
     this.draggingContent = content;
+    this.droppableZones = this.schedule.getDroppableSlots(content);
   }
 
   endDragging() {
     this.draggingContent = null;
   }
   getAllowsDrop(day, period) {
-    return (dragData: ScheduleContent) =>
-      (day + dragData.daySpan <= this.schedule.numDays) && (period + dragData.periodSpan <= this.schedule.numPeriods);
+    return () => {
+      if (this.droppableZones) {
+        return this.droppableZones[period][day];
+      }
+    }
   }
 
   startResizing(ev, content: ScheduleContent) {
-    console.log(content);
-
     if (content) {
       this.cellSize = {
         width: ev.rectangle.width / content.daySpan,
         height: ev.rectangle.height / content.periodSpan
       };
-      this.resizingContent = this.schedule.getContentInSlot(content.day, content.period);
+      this.resizingContent = content;
     }
   }
 
   endResizing(ev) {
-    console.log(this.resizingContent);
-
     if (this.resizingContent) {
       if (this.cellSize) {
         const resize = {
@@ -108,22 +109,12 @@ export class ScheduleComponent implements OnInit, OnDestroy {
           update.day = this.resizingContent.day - increase.day;
         }
 
-        // console.log(ev, update, this.resizingContent);
-
-        this.resizingContent.update(update);
-        this.schedule.updateContentGrid();
+        this.scheduleService.updateContent(this.resizingContent.uuid, new ScheduleContent(update));
       }
     }
 
     this.cellSize = null;
     this.resizingContent = null;
-  }
-
-  isDraggingZoneDisabled(dayId, periodId) {
-    if (this.draggingContent) {
-      return (this.draggingContent.day === dayId && this.draggingContent.period === periodId)
-        || !this.getAllowsDrop(dayId, periodId)(this.draggingContent);
-    }
   }
 
   // getSubZones(content: ScheduleContent) {

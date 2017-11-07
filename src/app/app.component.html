@@ -32,7 +32,7 @@
 
     <mat-card-content>
       <pre>
-        {{schedule$ | async | json}}
+        {{(schedule$ | async).exportable | json}}
       </pre>
     </mat-card-content>
   </mat-card>

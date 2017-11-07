@@ -52,23 +52,26 @@
         
         <!-- drop zones -->
 
-        <!-- <mat-grid-list
+        <mat-grid-list
+          *ngIf = "content.hasSubzones"
           class="drop-zone"
-          [class.disabled] = "isDraggingZoneDisabled(day,p)"
+          [class.disabled] = "!getAllowsDrop(day,p)()"
           [cols]="content.daySpan"
           rowHeight="60px"
         >
+        <!-- [allowDrop]="getAllowsDrop(zone.day,zone.period)" -->
           <mat-grid-tile
-            *ngFor = "let zone of getSubZones(content)"
+            *ngFor = "let zone of content.subzones"
             dnd-droppable
-            [allowDrop]="getAllowsDrop(day,p)"
-            (onDropSuccess)="onDrop($event, day,p)">
+            class="drop-zone"
+            (onDropSuccess)="onDrop($event, zone.day,zone.period)">
           </mat-grid-tile>
-        </mat-grid-list> -->
+        </mat-grid-list>
 
         <div
           class="drop-zone"
-          [class.disabled] = "isDraggingZoneDisabled(day,p)"
+          *ngIf = "!content.hasSubzones"
+          [class.disabled] = "!getAllowsDrop(day,p)()"
           dnd-droppable
           [allowDrop]="getAllowsDrop(day,p)"
           (onDropSuccess)="onDrop($event, day,p)">

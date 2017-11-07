@@ -1,13 +1,23 @@
 import {
-  ScheduleContent,
-} from '../shared/schedule-content';
-import {
   Component,
   Inject,
   OnInit,
 } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormGroup, FormControl } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+} from '@angular/forms';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material';
+
+import {
+  ScheduleContent,
+} from '../shared/schedule-content';
+import {
+  ScheduleService,
+} from '../shared/schedule.service';
 
 @Component({
   selector: 'app-schedule-content-dialog',
@@ -23,20 +33,21 @@ export class ScheduleContentDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ScheduleContentDialogComponent>,
+    private scheduleService: ScheduleService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   ngOnInit() {
-    this.content = this.data.content
+    this.content = this.data.content;
   }
 
 
   save() {
-    this.content.update({
+    this.scheduleService.updateContent(this.content.uuid, this.content.getUpdatedCopy({
       label: this.form.value.label,
       icon: this.form.value.icon,
       highlight: this.form.value.highlight
-    });
+    }));
 
     this.dialogRef.close({
       type: 'update',

@@ -49,8 +49,7 @@ export class ScheduleContentComponent implements OnInit {
         if (operation) {
           switch (operation.type) {
             case 'delete':
-              this.schedule.deleteContent(this.content);
-              this.scheduleService.updateLocalSchedule(this.schedule);
+              this.scheduleService.deleteContent(this.content);
               break;
             case 'update':
               this.update(this.content, operation.data, isNew)
@@ -64,8 +63,7 @@ export class ScheduleContentComponent implements OnInit {
     if (!newContent.label && isNew) {
       this.schedule.deleteContent(this.content);
     } else {
-      this.schedule.editContent(this.content, newContent);
+      this.scheduleService.updateContent(this.content.uuid, newContent);
     }
-    this.scheduleService.updateLocalSchedule(this.schedule);
   }
 }
