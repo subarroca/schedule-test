@@ -1,3 +1,4 @@
+import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import {
   BrowserModule,
@@ -15,12 +16,14 @@ import {
 import { DndModule } from 'ng2-dnd';
 
 import { AppComponent } from './app.component';
+import { MatIconRegistry } from '@angular/material';
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    HttpModule,
     BrowserModule,
     BrowserAnimationsModule,
     DndModule.forRoot(),
@@ -28,7 +31,10 @@ import { AppComponent } from './app.component';
     ScheduleModule,
     LibsModule
   ],
-  providers: [ScheduleService],
+  providers: [
+    ScheduleService,
+    MatIconRegistry
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

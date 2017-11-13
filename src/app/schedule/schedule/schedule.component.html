@@ -1,77 +1,75 @@
-<mat-grid-list
-  [cols] = "schedule.numDays+1"
-  rowHeight = "60px"
-  [class.visible-grid] = "!!draggingContent || !!resizingContent"
-  [class.allow-new] = "!resizingContent">
+<form [formGroup]="form"
+  fxLayout="column"
+  fxLayoutGap="1em">
+  <mat-form-field fxFlex>
+    <textarea matInput
+      formControlName="comment"
+      placeholder="Comment">
+    </textarea>
+  </mat-form-field>
+</form>
+
+<mat-grid-list [cols]="schedule?.numDays+1"
+  rowHeight="60px"
+  [class.visible-grid]="!!draggingContent || !!resizingContent"
+  [class.allow-new]="!resizingContent">
   <mat-grid-tile>
   </mat-grid-tile>
 
   <!--days-->
-  <mat-grid-tile
-    dnd-draggable
+  <mat-grid-tile dnd-draggable
     [dragEnabled]="true"
-    *ngFor = "let day of schedule.sortedDays">
+    *ngFor="let day of schedule?.sortedDays">
     {{ day.value }}
   </mat-grid-tile>
 
   <!-- periods -->
-  <div
-    *ngFor = "let period of schedule.visiblePeriods; let p = index">
+  <div *ngFor="let period of schedule?.visiblePeriods; let p = index">
     <mat-grid-tile>
-      <app-schedule-period
-        [schedule] = "schedule"
-        [id] = "p"
-        [period] = "period">
+      <app-schedule-period [schedule]="schedule"
+        [id]="p"
+        [period]="period">
       </app-schedule-period>
     </mat-grid-tile>
 
     <!-- contents -->
-    <div *ngFor = "let content of schedule.contentGrid[p];let day = index">
-      <mat-grid-tile
-        *ngIf = "!(content.empty && content.occupied)"
-        [colspan] = "content?.daySpan || 1"
-        [rowspan] = "content?.periodSpan || 1">
-        <app-schedule-content
-          [schedule] = "schedule"
-          [content] = "content"
-
+    <div *ngFor="let content of schedule?.contentGrid[p];let day = index">
+      <mat-grid-tile *ngIf="!(content.empty && content.occupied)"
+        [colspan]="content?.daySpan || 1"
+        [rowspan]="content?.periodSpan || 1">
+        <app-schedule-content 
+          [content]="content"
           mwlResizable
           [enableGhostResize]="true"
           [resizeEdges]="content.empty ? {} : {bottom: true, right: true}"
           (resizeStart)="startResizing($event,content)"
           (resizeEnd)="endResizing($event)"
-          resizeCursorPrecision = 10
-
+          resizeCursorPrecision="10"
           dnd-draggable
           [dragEnabled]="true"
           [dragData]="content"
-          (onDragStart) = "startDragging(content)"
-          (onDragEnd) = "endDragging()"
-          >
+          (onDragStart)="startDragging(content)"
+          (onDragEnd)="endDragging()">
         </app-schedule-content>
-        
+
         <!-- drop zones -->
 
-        <mat-grid-list
-          *ngIf = "content.hasSubzones"
+        <mat-grid-list *ngIf="content.hasSubzones"
           class="drop-zone"
-          [class.disabled] = "!getAllowsDrop(day,p)()"
+          [class.disabled]="!getAllowsDrop(day,p)()"
           [cols]="content.daySpan"
-          rowHeight="60px"
-        >
-        <!-- [allowDrop]="getAllowsDrop(zone.day,zone.period)" -->
-          <mat-grid-tile
-            *ngFor = "let zone of content.subzones"
+          rowHeight="60px">
+          <!-- [allowDrop]="getAllowsDrop(zone.day,zone.period)" -->
+          <mat-grid-tile *ngFor="let zone of content.subzones"
             dnd-droppable
             class="drop-zone"
             (onDropSuccess)="onDrop($event, zone.day,zone.period)">
           </mat-grid-tile>
         </mat-grid-list>
 
-        <div
-          class="drop-zone"
-          *ngIf = "!content.hasSubzones"
-          [class.disabled] = "!getAllowsDrop(day,p)()"
+        <div class="drop-zone"
+          *ngIf="!content.hasSubzones"
+          [class.disabled]="!getAllowsDrop(day,p)()"
           dnd-droppable
           [allowDrop]="getAllowsDrop(day,p)"
           (onDropSuccess)="onDrop($event, day,p)">
@@ -80,4 +78,3 @@
     </div>
   </div>
 </mat-grid-list>
-

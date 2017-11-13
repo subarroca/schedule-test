@@ -28,6 +28,7 @@ export class ScheduleContentDialogComponent implements OnInit {
   content: ScheduleContent;
   form: FormGroup = new FormGroup({
     label: new FormControl(),
+    icon: new FormControl(),
     highlight: new FormControl()
   })
 
@@ -39,6 +40,11 @@ export class ScheduleContentDialogComponent implements OnInit {
 
   ngOnInit() {
     this.content = this.data.content;
+    this.form.setValue({
+      label: this.content.label || '',
+      icon: this.content.icon || '',
+      highlight: !!this.content.highlight,
+    })
   }
 
 
@@ -60,5 +66,8 @@ export class ScheduleContentDialogComponent implements OnInit {
     });
   }
 
+  selectIcon(icon: string) {
+    this.form.controls.icon.setValue(icon);
+  }
 
 }

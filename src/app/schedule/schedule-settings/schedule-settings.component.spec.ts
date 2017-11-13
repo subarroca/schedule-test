@@ -1,13 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { ScheduleSelectorDialogComponent } from './schedule-selector.component';
+import { ScheduleSettingsComponent } from './schedule-settings.component';
 import { LibsModule } from 'app/libs/libs.module';
 import { ScheduleService } from 'app/schedule/shared/schedule.service';
 
-describe('ScheduleSelectorDialogComponent', () => {
-  let component: ScheduleSelectorDialogComponent;
-  let fixture: ComponentFixture<ScheduleSelectorDialogComponent>;
+describe('ScheduleSettingsComponent', () => {
+  let component: ScheduleSettingsComponent;
+  let fixture: ComponentFixture<ScheduleSettingsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -15,14 +15,14 @@ describe('ScheduleSelectorDialogComponent', () => {
         LibsModule,
         NoopAnimationsModule
       ],
-      declarations: [ScheduleSelectorDialogComponent],
+      declarations: [ScheduleSettingsComponent],
       providers: [ScheduleService]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ScheduleSelectorDialogComponent);
+    fixture = TestBed.createComponent(ScheduleSettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

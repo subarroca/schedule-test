@@ -28,14 +28,6 @@ export class Schedule {
     contents?: ScheduleContent[],
     periods?: SchedulePeriod[]
   } = {}) {
-    // TODO: For test purposes only!!!!
-    options.contents = [new ScheduleContent({
-      label: 'test',
-      period: 1,
-      day: 1,
-      periodSpan: 2,
-      daySpan: 2
-    })];
     options.numPeriods = 3;
 
 

@@ -18,21 +18,19 @@ import {
 import { Subscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'app-schedule-selector',
-  templateUrl: './schedule-selector.component.html',
-  styleUrls: ['./schedule-selector.component.scss']
+  selector: 'app-schedule-settings',
+  templateUrl: './schedule-settings.component.html',
+  styleUrls: ['./schedule-settings.component.scss']
 })
-export class ScheduleSelectorDialogComponent implements OnInit, OnDestroy {
+export class ScheduleSettingsComponent implements OnInit, OnDestroy {
   firstDayControl = new FormControl();
   numDaysControl = new FormControl();
   numPeriodsControl = new FormControl();
-  commentControl = new FormControl();
 
   form: FormGroup = new FormGroup({
     firstDay: this.firstDayControl,
     numDays: this.numDaysControl,
     numPeriods: this.numPeriodsControl,
-    comment: this.commentControl,
   });
   form$$: Subscription;
 
@@ -48,10 +46,9 @@ export class ScheduleSelectorDialogComponent implements OnInit, OnDestroy {
       .subscribe(
       schedule => this.scheduleService.updateSettings(schedule));
 
-    this.scheduleService.localSchedule$
-      .first()
-      .subscribe(schedule => {
-        this.schedule = schedule;
+    this.scheduleService.newSchedule$
+      .subscribe(() => {
+        this.schedule = this.scheduleService.localScheduleSubject.getValue();
         this.updateForm();
       })
   }
@@ -67,7 +64,6 @@ export class ScheduleSelectorDialogComponent implements OnInit, OnDestroy {
     this.firstDayControl.setValue(this.schedule.firstDay);
     this.numDaysControl.setValue(this.schedule.numDays);
     this.numPeriodsControl.setValue(this.schedule.numPeriods);
-    this.commentControl.setValue(this.schedule.comment);
   }
 
   decreasePeriods() {

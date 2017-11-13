@@ -6,15 +6,33 @@ Edit Event
   <form
     [formGroup] = form
     (ngSubmit)="save()" >
-    <mat-form-field>
-      <input
-        type = text
-        matInput
-        formControlName = label
-        placeholder = Title>
-    </mat-form-field>
+    <div class="field">
+      <mat-form-field>
+        <input
+          type = text
+          matInput
+          formControlName = label
+          placeholder = Title>
+      </mat-form-field>
+    </div>
 
-    <div>
+    <div class="field"
+      cols = 5
+      rowHeight = "36px"
+      fxLayout = "row">
+      <span
+        class = "icon-holder"
+        [class.selected] = "form.controls.icon.value === icon"
+        *ngFor="let icon of ['','sun-day-weather-symbol', 'crescent-moon-phase-outlined-shape', 'emotsmile', 'diamond']"
+        (click) = "selectIcon(icon)">
+        <mat-icon
+          fontSet = "alpadia">
+          {{icon}}
+        </mat-icon>
+      </span>
+    </div>
+  
+    <div class="field">
       <mat-checkbox
         formControlName = highlight>
         Highlight

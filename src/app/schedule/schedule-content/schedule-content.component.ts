@@ -23,7 +23,6 @@ import {
 })
 export class ScheduleContentComponent implements OnInit {
   @Input() content: ScheduleContent;
-  @Input() schedule: Schedule;
 
   constructor(
     public dialog: MatDialog,
@@ -61,7 +60,7 @@ export class ScheduleContentComponent implements OnInit {
 
   update(oldContent, newContent, isNew) {
     if (!newContent.label && isNew) {
-      this.schedule.deleteContent(this.content);
+      this.scheduleService.deleteContent(this.content);
     } else {
       this.scheduleService.updateContent(this.content.uuid, newContent);
     }

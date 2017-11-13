@@ -1,3 +1,6 @@
+import {
+  ScheduleSettingsComponent,
+} from './schedule-settings/schedule-settings.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { LibsModule } from 'app/libs/libs.module';
@@ -15,9 +18,6 @@ import {
   SchedulePeriodComponent,
 } from './schedule-period/schedule-period.component';
 import {
-  ScheduleSelectorDialogComponent,
-} from './schedule-selector/schedule-selector.component';
-import {
   ScheduleComponent,
 } from './schedule/schedule.component';
 
@@ -32,11 +32,11 @@ import {
     ScheduleContentDialogComponent,
     SchedulePeriodComponent,
     SchedulePeriodDialogComponent,
-    ScheduleSelectorDialogComponent
+    ScheduleSettingsComponent
   ],
   exports: [
     ScheduleComponent,
-    ScheduleSelectorDialogComponent
+    ScheduleSettingsComponent
   ],
   entryComponents: [
     ScheduleContentDialogComponent,

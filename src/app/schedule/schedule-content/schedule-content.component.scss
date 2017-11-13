@@ -1,4 +1,4 @@
-@import 'src/assets/colors';
+@import 'src/assets/styles/colors';
 
 :host{
   width: 100%;
@@ -38,12 +38,20 @@
   color: $black;
   background: rgba($champagne,.2);
   
+  .icon{
+    color: $champagne;
+  }
+  
   &--empty{
     color: $champagne;
   }
   
   &--highlight{
     background: rgba($champagne,.4);
+
+    .icon{
+      color: $black;
+    }
   }
 
   &:hover{
@@ -60,4 +68,16 @@
       opacity: 1;
     }
   }
+}
+
+.icon{
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.content-holder{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

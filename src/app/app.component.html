@@ -1,39 +1,99 @@
-<div
-  class = main-content>
+<mat-card class="main-content">
+  <mat-horizontal-stepper linear>
 
-  <mat-card>
-    <mat-card-title>
-      Edit school schedule
-    </mat-card-title>
+    <mat-step label="Initialize">
+      <mat-card-title>
+        Start from scratch
+      </mat-card-title>
+      <mat-card-content>
+        <button mat-button
+          color="primary"
+          (click)="resetSchedule()"
+          matStepperNext>
+          Start
+        </button>
+      </mat-card-content>
 
-    <mat-card-content>
-      <app-schedule-selector>
-      </app-schedule-selector>
-      <app-schedule>
-      </app-schedule>
-    </mat-card-content>
-    
-    <mat-card-actions>
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="saveSchedule()"
-      >
-        Save
-      </button>
-    </mat-card-actions>
-  </mat-card>
+      <mat-card-title>
+        Import schedule
+      </mat-card-title>
+      <mat-card-content>
+        <form [formGroup]="form">
+          <div>
+            <mat-form-field fxFlex>
+              <textarea matInput
+                formControlName="schedule"
+                rows="8"
+                placeholder="Schedule code">
+              </textarea>
+            </mat-form-field>
+          </div>
+          <button mat-button
+          color="primary"
+          (click)="importSchedule()"
+          matStepperNext>
+          Import
+        </button>
+      </form>
+      </mat-card-content>
 
-  
-  <mat-card>
-    <mat-card-title>
-      Schedule saved configuration
-    </mat-card-title>
+      <mat-card-title>
+        Load template
+      </mat-card-title>
+      <mat-card-content>
+        <button mat-button
+          color="primary"
+          matStepperNext>
+          Load
+        </button>
+      </mat-card-content>
+    </mat-step>
 
-    <mat-card-content>
-      <pre>
-        {{(schedule$ | async).exportable | json}}
-      </pre>
-    </mat-card-content>
-  </mat-card>
-</div>
+    <mat-step label="Edit"
+      disabled>
+
+      <mat-card-title>
+        Settings
+      </mat-card-title>
+
+      <mat-card-content>
+        <app-schedule-settings>
+        </app-schedule-settings>
+      </mat-card-content>
+
+      <mat-card-title>
+        Schedule
+      </mat-card-title>
+      <mat-card-content>
+        <app-schedule>
+        </app-schedule>
+      </mat-card-content>
+
+      <mat-card-content>
+        <button mat-button
+          color="primary"
+          (click)="saveSchedule()"
+          matStepperNext>
+          Export
+        </button>
+      </mat-card-content>
+    </mat-step>
+
+    <mat-step label="Export">
+      <mat-card-content>
+        <button mat-button
+          color="primary"
+          ngxClipboard
+          [cbContent] = "(schedule$ | async).exportable | json">
+          Copy schedule
+        </button>
+      </mat-card-content>
+
+      <mat-card-content>
+        <pre>
+          {{(schedule$ | async).exportable | json}}
+        </pre>
+      </mat-card-content>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-card>

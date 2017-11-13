@@ -5,9 +5,19 @@
   (click)="edit($event)"
   *ngIf="!content.empty"
   fxLayout="column"
-  fxLayoutAlign="space-between center"
+  fxLayoutAlign="center center"
 >
-  {{content.label || 'No title'}}
+  <div
+    class="content-holder">
+    <mat-icon
+      fontSet = "alpadia"
+      class = "icon"
+      *ngIf = "content.icon">
+      {{content.icon}}
+    </mat-icon>
+  
+    <span>{{content.label || 'No title'}}</span>
+  </div>
 
   <div
     class="drag-handle"

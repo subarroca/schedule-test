@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs/Rx';
 import {
   SchedulePeriod,
 } from './schedule-period';
@@ -13,6 +14,9 @@ import 'rxjs/add/operator/first';
 
 @Injectable()
 export class ScheduleService {
+  newScheduleSubject: Subject<boolean> = new Subject<boolean>();
+  newSchedule$: Observable<boolean> = this.newScheduleSubject.asObservable();
+
   localScheduleSubject: BehaviorSubject<Schedule> = new BehaviorSubject<Schedule>(new Schedule());
   localSchedule$: Observable<Schedule> = this.localScheduleSubject.asObservable();
 
@@ -20,6 +24,16 @@ export class ScheduleService {
   savedSchedule$: Observable<Schedule> = this.savedScheduleSubject.asObservable();
 
   constructor() { }
+
+  reset() {
+    this.localScheduleSubject.next(new Schedule());
+    this.newScheduleSubject.next(true);
+  }
+
+  import(schedule) {
+    this.localScheduleSubject.next(new Schedule(schedule));
+    this.newScheduleSubject.next(true);
+  }
 
   updateContent(contentId: string, newContent: ScheduleContent) {
     const schedule = this.localScheduleSubject.getValue();

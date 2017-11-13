@@ -1,0 +1,182 @@
+@import "icon-lib";
+
+@font-face {
+  font-family: 'alpadia';
+  src:
+    url('#{$icomoon-font-path}/alpadia.ttf?9wzqvk') format('truetype'),
+    url('#{$icomoon-font-path}/alpadia.woff?9wzqvk') format('woff'),
+    url('#{$icomoon-font-path}/alpadia.svg?9wzqvk#alpadia') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.alp-ico,
+[class^="alp-ico-"], [class*=" alp-ico-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'alpadia' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  
+  /* Enable Ligatures ================ */
+  letter-spacing: 0;
+  -webkit-font-feature-settings: "liga";
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  font-feature-settings: "liga";
+  -webkit-font-variant-ligatures: discretionary-ligatures;
+  font-variant-ligatures: discretionary-ligatures;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Custom =========== */
+  text-align: center;
+}
+
+.alp-ico-cutlery {
+  &:before {
+    content: $alp-ico-cutlery;
+  }
+}
+.alp-ico-people {
+  &:before {
+    content: $alp-ico-people;
+  }
+}
+.alp-ico-user2 {
+  &:before {
+    content: $alp-ico-user2;
+  }
+}
+.alp-ico-social-twitter {
+  &:before {
+    content: $alp-ico-social-twitter;
+  }
+}
+.alp-ico-social-tumblr {
+  &:before {
+    content: $alp-ico-social-tumblr;
+  }
+}
+.alp-ico-social-facebook {
+  &:before {
+    content: $alp-ico-social-facebook;
+  }
+}
+.alp-ico-screen-tablet {
+  &:before {
+    content: $alp-ico-screen-tablet;
+  }
+}
+.alp-ico-notebook {
+  &:before {
+    content: $alp-ico-notebook;
+  }
+}
+.alp-ico-graduation {
+  &:before {
+    content: $alp-ico-graduation;
+  }
+}
+.alp-ico-energy {
+  &:before {
+    content: $alp-ico-energy;
+  }
+}
+.alp-ico-emotsmile {
+  &:before {
+    content: $alp-ico-emotsmile;
+  }
+}
+.alp-ico-map2 {
+  &:before {
+    content: $alp-ico-map2;
+  }
+}
+.alp-ico-directions {
+  &:before {
+    content: $alp-ico-directions;
+  }
+}
+.alp-ico-diamond {
+  &:before {
+    content: $alp-ico-diamond;
+  }
+}
+.alp-ico-cup {
+  &:before {
+    content: $alp-ico-cup;
+  }
+}
+.alp-ico-book-open {
+  &:before {
+    content: $alp-ico-book-open;
+  }
+}
+.alp-ico-home2 {
+  &:before {
+    content: $alp-ico-home2;
+  }
+}
+.alp-ico-calender {
+  &:before {
+    content: $alp-ico-calender;
+  }
+}
+.alp-ico-location-pin {
+  &:before {
+    content: $alp-ico-location-pin;
+  }
+}
+.alp-ico-social-instagram {
+  &:before {
+    content: $alp-ico-social-instagram;
+  }
+}
+.alp-ico-social-linkedin {
+  &:before {
+    content: $alp-ico-social-linkedin;
+  }
+}
+.alp-ico-social-google {
+  &:before {
+    content: $alp-ico-social-google;
+  }
+}
+.alp-ico-crescent-moon-phase-outlined-shape {
+  &:before {
+    content: $alp-ico-crescent-moon-phase-outlined-shape;
+  }
+}
+.alp-ico-label-outline {
+  &:before {
+    content: $alp-ico-label-outline;
+  }
+}
+.alp-ico-sun-day-weather-symbol {
+  &:before {
+    content: $alp-ico-sun-day-weather-symbol;
+  }
+}
+.alp-ico-text-paper-sheet-symbol {
+  &:before {
+    content: $alp-ico-text-paper-sheet-symbol;
+  }
+}
+.alp-ico-book {
+  &:before {
+    content: $alp-ico-book;
+  }
+}
+.alp-ico-more-horizontal {
+  &:before {
+    content: $alp-ico-more-horizontal;
+  }
+}
+

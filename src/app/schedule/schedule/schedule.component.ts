@@ -1,9 +1,7 @@
 import {
-  ScheduleContent,
-} from '../shared/schedule-content';
-import {
-  ScheduleContentDialogComponent,
-} from '../schedule-content-dialog/schedule-content-dialog.component';
+  FormControl,
+  FormGroup,
+} from '@angular/forms';
 import 'rxjs/add/operator/first';
 
 import {
@@ -11,6 +9,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import {
   Schedule,
 } from 'app/schedule/shared/schedule';
@@ -18,7 +17,10 @@ import {
   ScheduleService,
 } from 'app/schedule/shared/schedule.service';
 import { Subscription } from 'rxjs/Subscription';
-import { MatDialog } from '@angular/material';
+
+import {
+  ScheduleContent,
+} from '../shared/schedule-content';
 
 
 @Component({
@@ -33,6 +35,13 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   draggingContent: ScheduleContent;
   schedule: Schedule;
   schedule$$: Subscription;
+  commentControl = new FormControl();
+
+  form: FormGroup = new FormGroup({
+    comment: this.commentControl,
+  });
+  form$$: Subscription;
+
 
   constructor(
     public dialog: MatDialog,
@@ -42,10 +51,24 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.schedule$$ = this.scheduleService.localSchedule$
       .subscribe(schedule => this.schedule = schedule);
+
+    this.form$$ = this.form
+      .valueChanges
+      .subscribe(
+      schedule => this.scheduleService.updateSettings(schedule));
+
+    this.scheduleService.newSchedule$
+      .subscribe(() => {
+        this.schedule = this.scheduleService.localScheduleSubject.getValue();
+        this.commentControl.setValue(this.schedule.comment);
+      })
   }
   ngOnDestroy() {
     if (this.schedule$$) {
       this.schedule$$.unsubscribe();
+    }
+    if (this.form$$) {
+      this.form$$.unsubscribe();
     }
   }
 
