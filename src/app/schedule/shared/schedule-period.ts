@@ -1,21 +1,21 @@
 export class SchedulePeriod {
   from: {
-    h: number,
-    m: number
+    h: string,
+    m: string
   };
   to: {
-    h: number,
-    m: number
+    h: string,
+    m: string
   };
 
   constructor(options: {
     from?: {
-      h: number,
-      m: number
+      h: string,
+      m: string
     },
     to?: {
-      h: number,
-      m: number
+      h: string,
+      m: string
     }
   } = {}) {
     this.update(options);
@@ -23,15 +23,15 @@ export class SchedulePeriod {
 
   update(options: {
     from?: {
-      h: number,
-      m: number
+      h: string,
+      m: string
     },
     to?: {
-      h: number,
-      m: number
+      h: string,
+      m: string
     }
   } = {}) {
-    this.from = options.from;
-    this.to = options.to;
+    this.from = options.from || this.from;
+    this.to = options.to || this.to;
   }
 }

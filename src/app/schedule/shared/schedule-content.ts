@@ -68,17 +68,16 @@ export class ScheduleContent {
     return new ScheduleContent(Object.assign({}, this, options));
   }
 
+  // check if other's start is in this' range or viceversa. then overlap
+  // check if both period and day overlap
   overlaps(other: ScheduleContent) {
-    // TODO: this should be reviewed
-    if (this.day !== other.day) {
-      return false;
-    } else {
-      if (this.periodSpan < other.period || other.periodSpan < this.period) {
-        return false;
-      } else {
-        return true;
-      }
-    }
+    const dayOverlap = (this.day >= other.day && this.day <= (other.day + other.daySpan - 1)
+      || other.day >= this.day && other.day <= (this.day + this.daySpan - 1));
+
+    const periodOverlap = (this.period >= other.period && this.period <= (other.period + other.periodSpan - 1)
+      || other.period >= this.period && other.period <= (this.period + this.periodSpan - 1));
+
+    return dayOverlap && periodOverlap;
   }
 
   get hasSubzones() {

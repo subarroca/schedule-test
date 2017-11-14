@@ -1,4 +1,6 @@
-import { HttpModule } from '@angular/http';
+import {
+  HttpClientModule,
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import {
   BrowserModule,
@@ -17,13 +19,17 @@ import { DndModule } from 'ng2-dnd';
 
 import { AppComponent } from './app.component';
 import { MatIconRegistry } from '@angular/material';
+import { ScheduleImportComponent } from './schedule/schedule-import/schedule-import.component';
+import { ScheduleLoadComponent } from './schedule/schedule-load/schedule-load.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ScheduleImportComponent,
+    ScheduleLoadComponent
   ],
   imports: [
-    HttpModule,
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
     DndModule.forRoot(),

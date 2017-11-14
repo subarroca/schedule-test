@@ -1,0 +1,103 @@
+{
+  "firstDay": 0,
+  "numDays": 5,
+  "numPeriods": 4,
+  "language": "en",
+  "contents": [
+    {
+      "period": 0,
+      "periodSpan": 1,
+      "day": 0,
+      "daySpan": 5,
+      "label": "General linguistic skills"
+    },
+    {
+      "period": 1,
+      "periodSpan": 1,
+      "day": 0,
+      "daySpan": 5,
+      "label": "oral communication (intensive 25 & premium 30)"
+    },
+    {
+      "period": 2,
+      "periodSpan": 1,
+      "day": 0,
+      "daySpan": 5,
+      "label": "written comunication (premium 30)"
+    },
+    {
+      "period": 3,
+      "periodSpan": 1,
+      "day": 0,
+      "daySpan": 1,
+      "label": " ",
+      "icon": "emotsmile"
+    },
+    {
+      "period": 3,
+      "periodSpan": 1,
+      "day": 1,
+      "daySpan": 1,
+      "label": " ",
+      "icon": "emotsmile"
+    },
+    {
+      "period": 3,
+      "periodSpan": 1,
+      "day": 2,
+      "daySpan": 1,
+      "label": " ",
+      "icon": "emotsmile"
+    },
+    {
+      "period": 3,
+      "periodSpan": 1,
+      "day": 3,
+      "daySpan": 1,
+      "label": " ",
+      "icon": "emotsmile"
+    }
+  ],
+  "periods": [
+    {
+      "from": {
+        "h": "08",
+        "m": "30"
+      },
+      "to": {
+        "h": "12",
+        "m": "30"
+      }
+    },
+    {
+      "from": {
+        "h": "12",
+        "m": "15"
+      },
+      "to": {
+        "h": "13",
+        "m": "00"
+      }
+    },
+    {
+      "from": {
+        "h": "13",
+        "m": "15"
+      },
+      "to": {
+        "h": "14",
+        "m": "00"
+      }
+    },
+    {
+      "from": {
+        "h": "14",
+        "m": "00"
+      },
+      "to": {
+        "h": "16",
+        "m": "30"
+      }
+    }
+  ]
+}

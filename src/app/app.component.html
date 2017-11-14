@@ -18,34 +18,14 @@
         Import schedule
       </mat-card-title>
       <mat-card-content>
-        <form [formGroup]="form">
-          <div>
-            <mat-form-field fxFlex>
-              <textarea matInput
-                formControlName="schedule"
-                rows="8"
-                placeholder="Schedule code">
-              </textarea>
-            </mat-form-field>
-          </div>
-          <button mat-button
-          color="primary"
-          (click)="importSchedule()"
-          matStepperNext>
-          Import
-        </button>
-      </form>
+        <app-schedule-import></app-schedule-import>
       </mat-card-content>
 
       <mat-card-title>
         Load template
       </mat-card-title>
       <mat-card-content>
-        <button mat-button
-          color="primary"
-          matStepperNext>
-          Load
-        </button>
+        <app-schedule-load></app-schedule-load>
       </mat-card-content>
     </mat-step>
 

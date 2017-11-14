@@ -28,11 +28,6 @@ import { Observable } from 'rxjs/Observable';
 export class AppComponent {
   schedule$: Observable<Schedule> = this.scheduleService.savedSchedule$;
 
-  scheduleControl: FormControl = new FormControl();
-  form: FormGroup = new FormGroup({
-    schedule: this.scheduleControl
-  })
-
   constructor(
     public scheduleService: ScheduleService,
     matIconRegistry: MatIconRegistry,
@@ -50,9 +45,5 @@ export class AppComponent {
 
   resetSchedule() {
     this.scheduleService.reset();
-  }
-
-  importSchedule() {
-    this.scheduleService.import(JSON.parse(this.form.controls.schedule.value));
   }
 }

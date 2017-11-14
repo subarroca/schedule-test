@@ -1,0 +1,19 @@
+<form [formGroup]="form">
+  <div>
+    <mat-form-field>
+      <mat-select formControlName="template">
+        <mat-option *ngFor="let template of templates"
+          [value]="template.key">
+          {{template.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <button mat-button
+    color="primary"
+    (click)="load()"
+    matStepperNext>
+    Load
+  </button>
+</form>

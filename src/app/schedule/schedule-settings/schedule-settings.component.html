@@ -1,15 +1,17 @@
 <form [formGroup]="form"
   fxLayout="column"
   fxLayoutGap="1em">
-  <mat-form-field floatPlaceholder="auto">
-    <mat-select formControlName="firstDay">
-      <mat-option *ngFor="let day of schedule?.days; let i = index"
-        [value]="i">
-        {{day}}
-      </mat-option>
-    </mat-select>
-    <mat-placeholder>Language</mat-placeholder>
-  </mat-form-field>
+  <div>
+    <mat-form-field floatPlaceholder="auto">
+      <mat-select formControlName="language">
+        <mat-option *ngFor="let language of languages"
+          [value]="language.key">
+          {{language.value}}
+        </mat-option>
+      </mat-select>
+      <mat-placeholder>Language</mat-placeholder>
+    </mat-form-field>
+  </div>
 
   <div fxLayout="row"
     fxLayoutGap="2%">

@@ -90,8 +90,9 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     this.draggingContent = null;
   }
   getAllowsDrop(day, period) {
+    // it might be that user changed table dimensions and no droppable zone is already calculated. Check both dimensions
     return () => {
-      if (this.droppableZones) {
+      if (this.droppableZones && this.droppableZones[period]) {
         return this.droppableZones[period][day];
       }
     }

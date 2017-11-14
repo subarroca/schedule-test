@@ -1,0 +1,30 @@
+[
+  {
+    "full": "Dimanche",
+    "short": "Dim"
+  },
+  {
+    "full": "Lundi",
+    "short": "Lun"
+  },
+  {
+    "full": "Mardi",
+    "short": "Mar"
+  },
+  {
+    "full": "Mercredi",
+    "short": "Mer"
+  },
+  {
+    "full": "Jeudi",
+    "short": "Jeu"
+  },
+  {
+    "full": "Vendredi",
+    "short": "Ven"
+  },
+  {
+    "full": "Samedi",
+    "short": "Sam"
+  }
+]

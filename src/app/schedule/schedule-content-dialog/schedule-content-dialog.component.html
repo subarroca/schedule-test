@@ -23,7 +23,7 @@ Edit Event
       <span
         class = "icon-holder"
         [class.selected] = "form.controls.icon.value === icon"
-        *ngFor="let icon of ['','sun-day-weather-symbol', 'crescent-moon-phase-outlined-shape', 'emotsmile', 'diamond']"
+        *ngFor="let icon of icons"
         (click) = "selectIcon(icon)">
         <mat-icon
           fontSet = "alpadia">

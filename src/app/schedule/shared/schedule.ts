@@ -13,6 +13,7 @@ export class Schedule {
   comment: string;
   contents: ScheduleContent[];
   periods: SchedulePeriod[] = [];
+  language: string;
 
   // remove before exporting
   visiblePeriods: SchedulePeriod[];
@@ -26,11 +27,9 @@ export class Schedule {
     numPeriods?: number,
     comment?: string,
     contents?: ScheduleContent[],
-    periods?: SchedulePeriod[]
+    periods?: SchedulePeriod[],
+    language?: string
   } = {}) {
-    options.numPeriods = 3;
-
-
     this.update(options);
   }
 
@@ -40,16 +39,20 @@ export class Schedule {
     numPeriods?: number,
     comment?: string,
     contents?: ScheduleContent[],
-    periods?: SchedulePeriod[]
+    periods?: SchedulePeriod[],
+    language?: string
   } = {}) {
     this.firstDay = options.firstDay || this.firstDay || 0;
     this.numDays = options.numDays || this.numDays || Weekday.days.length;
-    this.numPeriods = options.numPeriods || this.numPeriods || 1;
+    this.numPeriods = options.numPeriods || this.numPeriods || 3;
+
+    this.periods = options.periods ? options.periods.map(period => new SchedulePeriod(period)) : this.periods || [];
+    this.contents = options.contents ? options.contents.map(content => new ScheduleContent(content)) : this.contents || [];
+
+    console.log(this.periods);
 
     this.comment = options.comment || this.comment;
-
-    this.contents = options.contents || this.contents || [];
-    this.periods = options.periods || this.periods || [];
+    this.language = options.language || this.language || 'en';
 
     this.sortDays();
     this.updateVisiblePeriods();
@@ -276,11 +279,12 @@ export class Schedule {
       numDays: this.numDays,
       numPeriods: this.numPeriods,
       comment: this.comment,
+      language: this.language,
       contents: this.contents
         .filter(content => content.day < this.numDays && content.period < this.numPeriods)
         .map(content => content.exportable),
       periods: this.periods
-        .slice(0, this.numPeriods)
+        .slice(0, this.numPeriods),
     };
   }
 }

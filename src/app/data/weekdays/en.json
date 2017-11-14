@@ -1,0 +1,30 @@
+[
+  {
+    "full": "Sunday",
+    "short": "S"
+  },
+  {
+    "full": "Monday",
+    "short": "M"
+  },
+  {
+    "full": "Tuesday",
+    "short": "T"
+  },
+  {
+    "full": "Wednesday",
+    "short": "W"
+  },
+  {
+    "full": "Thursday",
+    "short": "T"
+  },
+  {
+    "full": "Friday",
+    "short": "F"
+  },
+  {
+    "full": "Saturday",
+    "short": "S"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "full": "Sonntag",
+    "short": "So"
+  },
+  {
+    "full": "Montag",
+    "short": "Mo"
+  },
+  {
+    "full": "Dienstag",
+    "short": "Di"
+  },
+  {
+    "full": "Mittwoch",
+    "short": "Mi"
+  },
+  {
+    "full": "Donnerstag",
+    "short": "Do"
+  },
+  {
+    "full": "Freitag",
+    "short": "Fr"
+  },
+  {
+    "full": "Samstag",
+    "short": "Sa"
+  }
+]

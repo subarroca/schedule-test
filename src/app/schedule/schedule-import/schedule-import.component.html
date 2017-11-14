@@ -1,0 +1,17 @@
+<form [formGroup]="form">
+  <div>
+    <mat-form-field fxFlex>
+      <textarea matInput
+        formControlName="schedule"
+        rows="8"
+        placeholder="Schedule code">
+              </textarea>
+    </mat-form-field>
+  </div>
+  <button mat-button
+    color="primary"
+    (click)="import()"
+    matStepperNext>
+    Import
+  </button>
+</form>

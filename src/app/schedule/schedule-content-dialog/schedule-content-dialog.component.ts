@@ -19,24 +19,29 @@ import {
   ScheduleService,
 } from '../shared/schedule.service';
 
+import * as iconList from 'app/data/icons.json';
+
 @Component({
   selector: 'app-schedule-content-dialog',
   templateUrl: './schedule-content-dialog.component.html',
   styleUrls: ['./schedule-content-dialog.component.scss']
 })
 export class ScheduleContentDialogComponent implements OnInit {
+  icons;
   content: ScheduleContent;
   form: FormGroup = new FormGroup({
     label: new FormControl(),
     icon: new FormControl(),
     highlight: new FormControl()
-  })
+  });
 
   constructor(
     public dialogRef: MatDialogRef<ScheduleContentDialogComponent>,
     private scheduleService: ScheduleService,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {
+    this.icons = iconList;
+  }
 
   ngOnInit() {
     this.content = this.data.content;

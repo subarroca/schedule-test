@@ -1,0 +1,220 @@
+{
+  "firstDay": 0,
+  "numDays": 7,
+  "numPeriods": 8,
+  "language": "en",
+  "contents": [
+    {
+      "period": 0,
+      "periodSpan": 1,
+      "day": 0,
+      "daySpan": 7,
+      "label": "Wake up",
+      "icon": "sun-day-weather-symbol"
+    },
+    {
+      "period": 1,
+      "periodSpan": 1,
+      "day": 0,
+      "daySpan": 7,
+      "label": "Breakfast",
+      "icon": "cup"
+    },
+    {
+      "period": 2,
+      "periodSpan": 1,
+      "day": 0,
+      "daySpan": 4,
+      "label": "Classes",
+      "icon": "book",
+      "highlight": true
+    },
+    {
+      "period": 2,
+      "periodSpan": 1,
+      "day": 4,
+      "daySpan": 1,
+      "label": "Classes & weekly test",
+      "icon": "book",
+      "highlight": true
+    },
+    {
+      "period": 2,
+      "periodSpan": 1,
+      "day": 5,
+      "daySpan": 1,
+      "label": "Free time",
+      "icon": "emotsmile"
+    },
+    {
+      "period": 2,
+      "periodSpan": 3,
+      "day": 6,
+      "daySpan": 1,
+      "label": "Excursion to",
+      "icon": "directions"
+    },
+    {
+      "period": 3,
+      "periodSpan": 1,
+      "day": 0,
+      "daySpan": 6,
+      "label": "Lunch",
+      "icon": "cutlery"
+    },
+    {
+      "period": 5,
+      "periodSpan": 1,
+      "day": 0,
+      "daySpan": 7,
+      "label": "Dinner",
+      "icon": "cutlery"
+    },
+    {
+      "period": 7,
+      "periodSpan": 1,
+      "day": 0,
+      "daySpan": 7,
+      "label": "Good night",
+      "icon": "crescent-moon-phase-outlined-shape"
+    },
+    {
+      "period": 6,
+      "periodSpan": 1,
+      "day": 0,
+      "daySpan": 1,
+      "label": " ",
+      "icon": "emotsmile"
+    },
+    {
+      "period": 6,
+      "periodSpan": 1,
+      "day": 1,
+      "daySpan": 1,
+      "label": " ",
+      "icon": "emotsmile"
+    },
+    {
+      "period": 6,
+      "periodSpan": 1,
+      "day": 2,
+      "daySpan": 1,
+      "label": " ",
+      "icon": "emotsmile"
+    },
+    {
+      "period": 6,
+      "periodSpan": 1,
+      "day": 3,
+      "daySpan": 1,
+      "label": " ",
+      "icon": "emotsmile"
+    },
+    {
+      "period": 6,
+      "periodSpan": 1,
+      "day": 4,
+      "daySpan": 1,
+      "label": " ",
+      "icon": "emotsmile"
+    },
+    {
+      "period": 6,
+      "periodSpan": 1,
+      "day": 5,
+      "daySpan": 1,
+      "label": " ",
+      "icon": "emotsmile"
+    },
+    {
+      "period": 6,
+      "periodSpan": 1,
+      "day": 6,
+      "daySpan": 1,
+      "label": "Welcome party",
+      "icon": "emotsmile"
+    }
+  ],
+  "periods": [
+    {
+      "from": {
+        "h": "07",
+        "m": "00"
+      },
+      "to": {
+        "h": "",
+        "m": ""
+      }
+    },
+    {
+      "from": {
+        "h": "07",
+        "m": "30"
+      },
+      "to": {
+        "h": "",
+        "m": ""
+      }
+    },
+    {
+      "from": {
+        "h": "08",
+        "m": "00"
+      },
+      "to": {
+        "h": "12",
+        "m": "30"
+      }
+    },
+    {
+      "from": {
+        "h": "12",
+        "m": "30"
+      },
+      "to": {
+        "h": "13",
+        "m": "30"
+      }
+    },
+    {
+      "from": {
+        "h": "14",
+        "m": "00"
+      },
+      "to": {
+        "h": "18",
+        "m": "00"
+      }
+    },
+    {
+      "from": {
+        "h": "18",
+        "m": "30"
+      },
+      "to": {
+        "h": "19",
+        "m": "30"
+      }
+    },
+    {
+      "from": {
+        "h": "20",
+        "m": "00"
+      },
+      "to": {
+        "h": "22",
+        "m": "00"
+      }
+    },
+    {
+      "from": {
+        "h": "22",
+        "m": "30"
+      },
+      "to": {
+        "h": "",
+        "m": ""
+      }
+    }
+  ]
+}
