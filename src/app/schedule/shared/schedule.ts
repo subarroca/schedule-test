@@ -43,7 +43,7 @@ export class Schedule {
     language?: string
   } = {}) {
     this.firstDay = options.firstDay || this.firstDay || 0;
-    this.numDays = options.numDays || this.numDays || Weekday.days.length;
+    this.numDays = options.numDays || this.numDays || 7;
     this.numPeriods = options.numPeriods || this.numPeriods || 3;
 
     this.periods = options.periods ? options.periods.map(period => new SchedulePeriod(period)) : this.periods || [];
@@ -52,7 +52,6 @@ export class Schedule {
     this.comment = options.comment || this.comment;
     this.language = options.language || this.language || 'en';
 
-    this.sortDays();
     this.updateVisiblePeriods();
     this.updateContentGrid();
   }
@@ -60,6 +59,7 @@ export class Schedule {
   getCopy() {
     const schedule = new Schedule();
     schedule.firstDay = this.firstDay;
+    schedule.language = this.language;
     schedule.numDays = this.numDays;
     schedule.numPeriods = this.numPeriods;
     schedule.comment = this.comment;
@@ -130,12 +130,10 @@ export class Schedule {
   // SETTINGS EDITION
   decreaseDays() {
     this.numDays = Math.max(1, this.numDays - 1);
-    this.sortDays();
     this.updateContentGrid();
   }
   increaseDays() {
-    this.numDays = Math.min(this.days.length, this.numDays + 1);
-    this.sortDays();
+    this.numDays = Math.min(7, this.numDays + 1);
     this.updateContentGrid();
   }
   decreasePeriods() {
@@ -152,7 +150,7 @@ export class Schedule {
     return true;
   }
   get canIncreaseDays() {
-    return this.numDays < this.days.length;
+    return this.numDays < 7;
   }
   get canDecreasePeriods() {
     return this.numPeriods > 1;
@@ -179,6 +177,7 @@ export class Schedule {
           grid[content.period + p][content.day + d].occupied = true;
         }
       }
+
       grid[content.period][content.day] = content;
     });
 
@@ -256,17 +255,8 @@ export class Schedule {
   // GETTERS FOR SELECT OPTIONS
   // This could be static but we might want to adapt the
   // number of periods available based on first period, for instance
-  get days() {
-    return Weekday.days;
-  }
-
   get numDaysOptions() {
-    return Array.from(Array(this.days.length + 1).keys()).slice(1);
-  }
-
-  // Don't use a getter or drag and drop will break
-  sortDays() {
-    this.sortedDays = Weekday.getSortedDays(this.firstDay).slice(0, this.numDays);
+    return Array.from(Array(8).keys()).slice(1);
   }
 
 

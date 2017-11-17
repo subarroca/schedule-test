@@ -21,6 +21,7 @@ import { AppComponent } from './app.component';
 import { MatIconRegistry } from '@angular/material';
 import { ScheduleImportComponent } from './schedule/schedule-import/schedule-import.component';
 import { ScheduleLoadComponent } from './schedule/schedule-load/schedule-load.component';
+import { WeekdayService } from 'app/shared/weekday.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ScheduleLoadComponent } from './schedule/schedule-load/schedule-load.co
   ],
   providers: [
     ScheduleService,
+    WeekdayService,
     MatIconRegistry
   ],
   bootstrap: [AppComponent]

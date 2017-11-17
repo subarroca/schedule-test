@@ -18,8 +18,8 @@
 
   <!--days-->
   <mat-grid-tile
-    *ngFor="let day of schedule?.sortedDays">
-    {{ day.value }}
+    *ngFor="let day of sortedDays$|async">
+    {{ day?.full }}
   </mat-grid-tile>
 
   <!-- periods -->

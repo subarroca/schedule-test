@@ -1,3 +1,4 @@
+import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/first';
 
 import {
@@ -18,12 +19,18 @@ import {
 } from 'app/schedule/shared/schedule.service';
 import { Subscription } from 'rxjs/Subscription';
 
+import {
+  WeekdayService,
+} from '../../shared/weekday.service';
+
 @Component({
   selector: 'app-schedule-settings',
   templateUrl: './schedule-settings.component.html',
   styleUrls: ['./schedule-settings.component.scss']
 })
 export class ScheduleSettingsComponent implements OnInit, OnDestroy {
+  weekdays$ = this.weekdayService.weekdays$;
+
   languages = [{
     key: 'en',
     value: 'English'
@@ -52,6 +59,7 @@ export class ScheduleSettingsComponent implements OnInit, OnDestroy {
 
   constructor(
     private scheduleService: ScheduleService,
+    private weekdayService: WeekdayService,
     private fb: FormBuilder
   ) { }
 

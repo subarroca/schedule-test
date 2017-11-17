@@ -17,9 +17,9 @@
     fxLayoutGap="2%">
     <mat-form-field floatPlaceholder="auto">
       <mat-select formControlName="firstDay">
-        <mat-option *ngFor="let day of schedule?.days; let i = index"
+        <mat-option *ngFor="let day of weekdays$ | async; let i = index"
           [value]="i">
-          {{day}}
+          {{day.full}}
         </mat-option>
       </mat-select>
       <mat-placeholder>First day</mat-placeholder>

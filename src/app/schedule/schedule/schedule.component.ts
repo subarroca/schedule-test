@@ -16,8 +16,13 @@ import {
 import {
   ScheduleService,
 } from 'app/schedule/shared/schedule.service';
+import { Weekday } from 'app/shared/weekday';
+import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
+import {
+  WeekdayService,
+} from '../../shared/weekday.service';
 import {
   ScheduleContent,
 } from '../shared/schedule-content';
@@ -37,6 +42,8 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   schedule$$: Subscription;
   newSchedule$$: Subscription;
 
+  sortedDays$: Observable<Weekday[]> = this.weekdayService.sortedDays$;
+
   form: FormGroup;
   form$$: Subscription;
 
@@ -44,6 +51,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   constructor(
     public dialog: MatDialog,
     private scheduleService: ScheduleService,
+    private weekdayService: WeekdayService,
     private fb: FormBuilder
   ) { }
 

@@ -1,16 +1,24 @@
-import { Subject } from 'rxjs/Rx';
+import 'rxjs/add/operator/first';
+
+import { Injectable } from '@angular/core';
 import {
-  SchedulePeriod,
-} from './schedule-period';
+  Schedule,
+} from 'app/schedule/shared/schedule';
+import { Subject } from 'rxjs/Subject';
+import {
+  BehaviorSubject,
+} from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+
+import {
+  WeekdayService,
+} from '../../shared/weekday.service';
 import {
   ScheduleContent,
 } from './schedule-content';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Schedule } from 'app/schedule/shared/schedule';
-import { Observable } from 'rxjs/Observable';
-
-import 'rxjs/add/operator/first';
+import {
+  SchedulePeriod,
+} from './schedule-period';
 
 @Injectable()
 export class ScheduleService {
@@ -23,16 +31,23 @@ export class ScheduleService {
   savedScheduleSubject: BehaviorSubject<Schedule> = new BehaviorSubject<Schedule>(new Schedule());
   savedSchedule$: Observable<Schedule> = this.savedScheduleSubject.asObservable();
 
-  constructor() { }
+  constructor(
+    private weekdayService: WeekdayService
+  ) { }
 
   reset() {
-    this.localScheduleSubject.next(new Schedule());
+    const schedule = new Schedule();
+    this.localScheduleSubject.next(schedule);
     this.newScheduleSubject.next(true);
+    this.weekdayService.sortDays(schedule.firstDay, schedule.numDays);
+    this.weekdayService.loadLanguage(schedule.language);
   }
 
   import(schedule) {
     this.localScheduleSubject.next(new Schedule(schedule));
     this.newScheduleSubject.next(true);
+    this.weekdayService.sortDays(schedule.firstDay, schedule.numDays);
+    this.weekdayService.loadLanguage(schedule.language);
   }
 
   updateContent(contentId: string, newContent: ScheduleContent) {
@@ -52,6 +67,14 @@ export class ScheduleService {
   }
   updateSettings(schedule: Schedule) {
     const oldSchedule = this.localScheduleSubject.getValue();
+
+    if (oldSchedule.firstDay !== schedule.firstDay || oldSchedule.numDays !== schedule.numDays) {
+      this.weekdayService.sortDays(schedule.firstDay, schedule.numDays);
+    }
+    if (oldSchedule.language !== schedule.language) {
+      this.weekdayService.loadLanguage(schedule.language);
+    }
+
     oldSchedule.update(schedule);
     this.localScheduleSubject.next(oldSchedule);
   }

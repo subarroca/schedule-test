@@ -8,7 +8,9 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "bundle-report": "webpack-bundle-analyzer dist/stats.json",
+    "build-analyze": "ng build --prod --stats-json && npm run bundle-report"
   },
   "private": true,
   "dependencies": {
@@ -51,6 +53,7 @@
     "protractor": "~5.2.0",
     "ts-node": "~3.3.0",
     "tslint": "~5.8.0",
-    "typescript": "2.4.2"
+    "typescript": "2.4.2",
+    "webpack-bundle-analyzer": "^2.9.1"
   }
 }

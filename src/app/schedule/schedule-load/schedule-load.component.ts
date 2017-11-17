@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {
@@ -6,6 +5,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import {
+  Schedule,
+} from 'app/schedule/shared/schedule';
+import { Observable } from 'rxjs/Observable';
 
 import {
   ScheduleService,
@@ -41,7 +44,7 @@ export class ScheduleLoadComponent implements OnInit {
   }
 
   loadTemplate() {
-    this.http.get(`assets/templates/${this.form.controls.template.value}.json`)
+    this.http.get<Schedule>(`assets/templates/${this.form.controls.template.value}.json`)
       .subscribe(data =>
         this.scheduleService.import(data)
       )

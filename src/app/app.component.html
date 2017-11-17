@@ -29,8 +29,20 @@
       </mat-card-content>
     </mat-step>
 
-    <mat-step label="Edit"
-      disabled>
+    <mat-step label="Edit">
+      <mat-card-content>
+        <button mat-button
+          (click)="scrollTop()"
+          matStepperPrevious>
+          Back
+        </button>
+        <button mat-button
+          color="primary"
+          (click)="saveSchedule();scrollTop()"
+          matStepperNext>
+          Export
+        </button>
+      </mat-card-content>
 
       <mat-card-title>
         Settings
@@ -51,6 +63,11 @@
 
       <mat-card-content>
         <button mat-button
+          (click)="scrollTop()"
+          matStepperPrevious>
+          Back
+        </button>
+        <button mat-button
           color="primary"
           (click)="saveSchedule();scrollTop()"
           matStepperNext>
@@ -61,6 +78,11 @@
 
     <mat-step label="Export">
       <mat-card-content>
+        <button mat-button
+          (click)="scrollTop()"
+          matStepperPrevious>
+          Back
+        </button>
         <button mat-button
           color="primary"
           ngxClipboard
@@ -73,6 +95,20 @@
         <pre>
           {{(schedule$ | async).exportable | json}}
         </pre>
+      </mat-card-content>
+      
+      <mat-card-content>
+        <button mat-button
+          (click)="scrollTop()"
+          matStepperPrevious>
+          Back
+        </button>
+        <button mat-button
+          color="primary"
+          ngxClipboard
+          [cbContent]="(schedule$ | async).exportable | json">
+          Copy schedule
+        </button>
       </mat-card-content>
     </mat-step>
   </mat-horizontal-stepper>

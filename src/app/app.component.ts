@@ -1,3 +1,5 @@
+import 'rxjs/add/observable/timer';
+
 import { Component } from '@angular/core';
 import {
   MatIconRegistry,
