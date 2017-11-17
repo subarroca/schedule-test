@@ -1,7 +1,9 @@
-<form [formGroup]="form">
+<form [formGroup]="form"
+  (ngSubmit)="loadTemplate();scrollTop()">
   <div>
     <mat-form-field>
-      <mat-select formControlName="template">
+      <mat-select formControlName="template"
+        placeholder="Template">
         <mat-option *ngFor="let template of templates"
           [value]="template.key">
           {{template.value}}
@@ -9,10 +11,10 @@
       </mat-select>
     </mat-form-field>
   </div>
-
+  
   <button mat-button
+    [disabled]="!form.valid"
     color="primary"
-    (click)="load()"
     matStepperNext>
     Load
   </button>

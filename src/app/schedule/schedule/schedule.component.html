@@ -12,20 +12,20 @@
 <mat-grid-list [cols]="schedule?.numDays+1"
   rowHeight="72px"
   [class.visible-grid]="!!draggingContent || !!resizingContent"
-  [class.allow-new]="!resizingContent">
+  [class.allow-new]="!draggingContent && !resizingContent">
   <mat-grid-tile>
   </mat-grid-tile>
 
   <!--days-->
-  <mat-grid-tile dnd-draggable
-    [dragEnabled]="true"
+  <mat-grid-tile
     *ngFor="let day of schedule?.sortedDays">
     {{ day.value }}
   </mat-grid-tile>
 
   <!-- periods -->
   <div *ngFor="let period of schedule?.visiblePeriods; let p = index">
-    <mat-grid-tile>
+    <mat-grid-tile
+      class="period-holder">
       <app-schedule-period [schedule]="schedule"
         [id]="p"
         [period]="period">
@@ -58,10 +58,10 @@
           class="drop-zone"
           [class.disabled]="!getAllowsDrop(day,p)()"
           [cols]="content.daySpan"
-          rowHeight="60px">
-          <!-- [allowDrop]="getAllowsDrop(zone.day,zone.period)" -->
+          rowHeight="72px">
           <mat-grid-tile *ngFor="let zone of content.subzones"
             dnd-droppable
+            [allowDrop]="getAllowsDrop(zone.day,zone.period)"
             class="drop-zone"
             (onDropSuccess)="onDrop($event, zone.day,zone.period)">
           </mat-grid-tile>

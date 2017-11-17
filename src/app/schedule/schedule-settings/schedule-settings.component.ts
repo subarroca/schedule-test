@@ -6,8 +6,9 @@ import {
   OnInit,
 } from '@angular/core';
 import {
-  FormControl,
+  FormBuilder,
   FormGroup,
+  Validators,
 } from '@angular/forms';
 import {
   Schedule,
@@ -23,11 +24,6 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./schedule-settings.component.scss']
 })
 export class ScheduleSettingsComponent implements OnInit, OnDestroy {
-  languageControl = new FormControl();
-  firstDayControl = new FormControl();
-  numDaysControl = new FormControl();
-  numPeriodsControl = new FormControl();
-
   languages = [{
     key: 'en',
     value: 'English'
@@ -48,28 +44,31 @@ export class ScheduleSettingsComponent implements OnInit, OnDestroy {
     value: 'Russian'
   }]
 
-  form: FormGroup = new FormGroup({
-    language: this.languageControl,
-    firstDay: this.firstDayControl,
-    numDays: this.numDaysControl,
-    numPeriods: this.numPeriodsControl,
-  });
+  form: FormGroup;
   form$$: Subscription;
 
   schedule: Schedule;
+  newSchedule$$: Subscription;
 
   constructor(
-    private scheduleService: ScheduleService
+    private scheduleService: ScheduleService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      language: ['', Validators.required],
+      firstDay: ['', Validators.required],
+      numDays: ['', Validators.required],
+      numPeriods: ['', Validators.required],
+    });
     this.form$$ = this.form
       .valueChanges
       .debounceTime(200)
       .subscribe(
       schedule => this.scheduleService.updateSettings(schedule));
 
-    this.scheduleService.newSchedule$
+    this.newSchedule$$ = this.scheduleService.newSchedule$
       .subscribe(() => {
         this.schedule = this.scheduleService.localScheduleSubject.getValue();
         this.updateForm();
@@ -80,32 +79,35 @@ export class ScheduleSettingsComponent implements OnInit, OnDestroy {
     if (this.form$$) {
       this.form$$.unsubscribe();
     }
+    if (this.newSchedule$$) {
+      this.newSchedule$$.unsubscribe();
+    }
   }
 
 
   updateForm() {
-    this.languageControl.setValue(this.schedule.language);
-    this.firstDayControl.setValue(this.schedule.firstDay);
-    this.numDaysControl.setValue(this.schedule.numDays);
-    this.numPeriodsControl.setValue(this.schedule.numPeriods);
+    this.form.controls.language.setValue(this.schedule.language);
+    this.form.controls.firstDay.setValue(this.schedule.firstDay);
+    this.form.controls.numDays.setValue(this.schedule.numDays);
+    this.form.controls.numPeriods.setValue(this.schedule.numPeriods);
   }
 
   decreasePeriods() {
     this.schedule.decreasePeriods();
-    this.numPeriodsControl.setValue(this.schedule.numPeriods);
+    this.form.controls.numPeriods.setValue(this.schedule.numPeriods);
   }
   increasePeriods() {
     this.schedule.increasePeriods();
-    this.numPeriodsControl.setValue(this.schedule.numPeriods);
+    this.form.controls.numPeriods.setValue(this.schedule.numPeriods);
   }
 
   decreaseDays() {
     this.schedule.decreaseDays();
-    this.numDaysControl.setValue(this.schedule.numDays);
+    this.form.controls.numDays.setValue(this.schedule.numDays);
   }
   increaseDays() {
     this.schedule.increaseDays();
-    this.numDaysControl.setValue(this.schedule.numDays);
+    this.form.controls.numDays.setValue(this.schedule.numDays);
   }
 
 }

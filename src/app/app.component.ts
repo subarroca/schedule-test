@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-} from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
+import { Component } from '@angular/core';
 import {
   MatIconRegistry,
 } from '@angular/material';
@@ -45,5 +38,15 @@ export class AppComponent {
 
   resetSchedule() {
     this.scheduleService.reset();
+  }
+
+  scrollTop() {
+    Observable.timer(500, 0)
+      .first()
+      .subscribe(() =>
+        window.scroll({
+          top: 0,
+          behavior: 'smooth'
+        }));
   }
 }

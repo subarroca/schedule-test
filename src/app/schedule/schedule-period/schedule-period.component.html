@@ -1,9 +1,12 @@
 <div *ngIf=period?.from?.h>
-  {{ period?.from?.h }} {{period?.from?.m}}
+  <span class="h">{{ period?.from?.h }}</span>
+  <span class="m">{{period?.from?.m}}</span>
 </div>
 <div *ngIf=period?.to>
-  {{ period?.to?.h }} {{period?.to?.m}}
+  <span class="h">{{ period?.to?.h }}</span>
+  <span class="m">{{period?.to?.m}}</span>
 </div>
 <div *ngIf="!period?.from?.h">
-  HH:mm
+  <span class="h">HH</span>
+  <span class="m">mm</span>
 </div>

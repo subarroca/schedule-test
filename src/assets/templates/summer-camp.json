@@ -52,7 +52,8 @@
       "day": 6,
       "daySpan": 1,
       "label": "Excursion to",
-      "icon": "directions"
+      "icon": "directions",
+      "highlight": true
     },
     {
       "period": 3,
@@ -84,7 +85,8 @@
       "day": 0,
       "daySpan": 1,
       "label": " ",
-      "icon": "emotsmile"
+      "icon": "emotsmile",
+      "highlight": true
     },
     {
       "period": 6,
@@ -92,7 +94,8 @@
       "day": 1,
       "daySpan": 1,
       "label": " ",
-      "icon": "emotsmile"
+      "icon": "emotsmile",
+      "highlight": true
     },
     {
       "period": 6,
@@ -100,7 +103,8 @@
       "day": 2,
       "daySpan": 1,
       "label": " ",
-      "icon": "emotsmile"
+      "icon": "emotsmile",
+      "highlight": true
     },
     {
       "period": 6,
@@ -108,7 +112,8 @@
       "day": 3,
       "daySpan": 1,
       "label": " ",
-      "icon": "emotsmile"
+      "icon": "emotsmile",
+      "highlight": true
     },
     {
       "period": 6,
@@ -116,7 +121,8 @@
       "day": 4,
       "daySpan": 1,
       "label": " ",
-      "icon": "emotsmile"
+      "icon": "emotsmile",
+      "highlight": true
     },
     {
       "period": 6,
@@ -124,7 +130,8 @@
       "day": 5,
       "daySpan": 1,
       "label": " ",
-      "icon": "emotsmile"
+      "icon": "emotsmile",
+      "highlight": true
     },
     {
       "period": 6,
@@ -132,7 +139,60 @@
       "day": 6,
       "daySpan": 1,
       "label": "Welcome party",
-      "icon": "emotsmile"
+      "icon": "emotsmile",
+      "highlight": true
+    },
+    {
+      "period": 4,
+      "periodSpan": 1,
+      "day": 0,
+      "daySpan": 1,
+      "hasIncludedActivity": true,
+      "hasPremiumActivity": false
+    },
+    {
+      "period": 4,
+      "periodSpan": 1,
+      "day": 1,
+      "daySpan": 1,
+      "hasIncludedActivity": true,
+      "hasPremiumActivity": true
+    },
+    {
+      "period": 4,
+      "periodSpan": 1,
+      "day": 3,
+      "daySpan": 1,
+      "hasIncludedActivity": true,
+      "hasPremiumActivity": true
+    },
+    {
+      "period": 4,
+      "periodSpan": 1,
+      "day": 5,
+      "daySpan": 1,
+      "label": " ",
+      "icon": "emotsmile",
+      "hasIncludedActivity": false,
+      "hasPremiumActivity": false
+    },
+    {
+      "period": 4,
+      "periodSpan": 1,
+      "day": 2,
+      "daySpan": 1,
+      "label": " ",
+      "icon": "emotsmile",
+      "hasIncludedActivity": false,
+      "hasPremiumActivity": false
+    },
+    {
+      "period": 4,
+      "periodSpan": 1,
+      "day": 4,
+      "daySpan": 1,
+      "hasIncludedActivity": true,
+      "hasPremiumActivity": true
     }
   ],
   "periods": [

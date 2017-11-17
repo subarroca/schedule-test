@@ -1,11 +1,13 @@
+import { Observable } from 'rxjs/Rx';
 import {
   ScheduleService,
 } from '../shared/schedule.service';
 import {
-  FormControl,
   FormGroup,
+  Validators,
 } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-schedule-import',
@@ -13,21 +15,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./schedule-import.component.scss']
 })
 export class ScheduleImportComponent implements OnInit {
-  scheduleControl: FormControl = new FormControl();
-  form: FormGroup = new FormGroup({
-    schedule: this.scheduleControl
-  });
+  form: FormGroup;
 
 
   constructor(
-    public scheduleService: ScheduleService
+    public scheduleService: ScheduleService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      schedule: ['', Validators.required]
+    })
   }
 
   import() {
     this.scheduleService.import(JSON.parse(this.form.controls.schedule.value));
   }
 
+  scrollTop() {
+    Observable.timer(500, 0)
+      .first()
+      .subscribe(() =>
+        window.scroll({
+          top: 0,
+          behavior: 'smooth'
+        }));
+  }
 }

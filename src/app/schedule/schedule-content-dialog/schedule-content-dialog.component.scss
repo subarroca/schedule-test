@@ -1,9 +1,6 @@
 @import 'src/assets/styles/colors';
 @import '~@angular/material/theming';
 
-.field{
-  padding: 20px 0;
-}
 
 mat-icon{
   font-size: 24px;
@@ -21,4 +18,12 @@ mat-icon{
 .selected{
   color: mat-color(mat-palette($mat-red));
   border-bottom: 2px solid mat-color(mat-palette($mat-red));
+}
+
+img{
+  margin: 6px 0 0 4px;
+}
+
+mat-dialog-content{
+  padding-bottom: 20px;
 }

@@ -1,14 +1,20 @@
 import {
-  SchedulePeriod,
-} from '../shared/schedule-period';
-import {
   Component,
   Inject,
-  Input,
   OnInit,
 } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { FormGroup, FormControl } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+} from '@angular/forms';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+} from '@angular/material';
+
+import {
+  SchedulePeriod,
+} from '../shared/schedule-period';
 
 @Component({
   selector: 'app-schedule-period-dialog',
@@ -18,17 +24,21 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class SchedulePeriodDialogComponent implements OnInit {
   period: SchedulePeriod;
 
-  form: FormGroup = new FormGroup({
-    from: new FormControl(),
-    to: new FormControl()
-  })
+  form: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<SchedulePeriodDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      from: '',
+      to: ''
+    });
+
+
     this.period = this.data.period;
     if (this.period && this.period.from && this.period.to) {
       this.form.setValue({

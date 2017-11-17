@@ -1,7 +1,3 @@
-import {
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
 import 'rxjs/add/operator/first';
 
 import {
@@ -9,6 +5,10 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+} from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import {
   Schedule,
@@ -35,20 +35,22 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   draggingContent: ScheduleContent;
   schedule: Schedule;
   schedule$$: Subscription;
-  commentControl = new FormControl();
+  newSchedule$$: Subscription;
 
-  form: FormGroup = new FormGroup({
-    comment: this.commentControl,
-  });
+  form: FormGroup;
   form$$: Subscription;
 
 
   constructor(
     public dialog: MatDialog,
-    private scheduleService: ScheduleService
+    private scheduleService: ScheduleService,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      comment: '',
+    })
     this.schedule$$ = this.scheduleService.localSchedule$
       .subscribe(schedule => this.schedule = schedule);
 
@@ -57,10 +59,10 @@ export class ScheduleComponent implements OnInit, OnDestroy {
       .subscribe(
       schedule => this.scheduleService.updateSettings(schedule));
 
-    this.scheduleService.newSchedule$
+    this.newSchedule$$ = this.scheduleService.newSchedule$
       .subscribe(() => {
         this.schedule = this.scheduleService.localScheduleSubject.getValue();
-        this.commentControl.setValue(this.schedule.comment);
+        this.form.controls.comment.setValue(this.schedule.comment);
       })
   }
   ngOnDestroy() {
@@ -69,6 +71,9 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     }
     if (this.form$$) {
       this.form$$.unsubscribe();
+    }
+    if (this.newSchedule$$) {
+      this.newSchedule$$.unsubscribe();
     }
   }
 

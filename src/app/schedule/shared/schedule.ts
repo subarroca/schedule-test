@@ -49,8 +49,6 @@ export class Schedule {
     this.periods = options.periods ? options.periods.map(period => new SchedulePeriod(period)) : this.periods || [];
     this.contents = options.contents ? options.contents.map(content => new ScheduleContent(content)) : this.contents || [];
 
-    console.log(this.periods);
-
     this.comment = options.comment || this.comment;
     this.language = options.language || this.language || 'en';
 
@@ -101,8 +99,9 @@ export class Schedule {
   }
 
   deleteContent(content: ScheduleContent) {
-    content.empty = true;
     content.label = '';
+    content.hasIncludedActivity = false;
+    content.hasPremiumActivity = false;
     content.occupied = false;
     this.updateContent(content.uuid, content);
   }

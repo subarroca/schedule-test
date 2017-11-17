@@ -1,12 +1,15 @@
+import { Observable } from 'rxjs/Rx';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+
 import {
   ScheduleService,
 } from '../shared/schedule.service';
-import {
-  FormControl,
-  FormGroup,
-} from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-schedule-load',
@@ -14,10 +17,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./schedule-load.component.scss']
 })
 export class ScheduleLoadComponent implements OnInit {
-  templateControl: FormControl = new FormControl();
-  form: FormGroup = new FormGroup({
-    template: this.templateControl
-  })
+  form: FormGroup;
 
   templates = [{
     key: 'summer-camp',
@@ -30,17 +30,30 @@ export class ScheduleLoadComponent implements OnInit {
 
   constructor(
     public scheduleService: ScheduleService,
-    private http: HttpClient
+    private http: HttpClient,
+    private fb: FormBuilder
   ) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      template: ['', Validators.required]
+    })
   }
 
-  load() {
+  loadTemplate() {
     this.http.get(`assets/templates/${this.form.controls.template.value}.json`)
       .subscribe(data =>
         this.scheduleService.import(data)
       )
   }
 
+  scrollTop() {
+    Observable.timer(500, 0)
+      .first()
+      .subscribe(() =>
+        window.scroll({
+          top: 0,
+          behavior: 'smooth'
+        }));
+  }
 }

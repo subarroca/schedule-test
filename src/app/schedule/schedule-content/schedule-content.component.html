@@ -1,7 +1,6 @@
 <div
   class="cell content"
   [class.content--highlight] = "content.highlight"
-  [class.content--empty] = "!content.label"
   (click)="edit($event)"
   *ngIf="!content.empty"
   fxLayout="column"
@@ -16,7 +15,15 @@
       {{content.icon}}
     </mat-icon>
   
-    <span>{{content.label || 'No title'}}</span>
+    <span [innerHtml] ="content.formatedLabel"></span>
+    <img src="assets/img/included-activity.svg"
+      *ngIf="content.hasIncludedActivity"
+      alt="Included activity"
+      height="30px">
+      <img src="assets/img/premium-activity.svg"
+      *ngIf="content.hasPremiumActivity"
+      alt="Premium activity"
+      height="30px">
   </div>
 
   <div
@@ -29,7 +36,7 @@
 </div>
 
 <div
-  class="cell placeholder"
+  class="cell content-empty"
   *ngIf="content.empty"
   (click) = "edit($event)">
   <mat-icon>

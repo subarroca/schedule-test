@@ -1,0 +1,30 @@
+<svg id="SvgjsSvg1001" width="150" height="50" xmlns="http://www.w3.org/2000/svg"
+version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs">
+  <style>
+    text{
+      font: 600 18px "Open Sans", sans-serif;
+      <!-- fill: white; -->
+      fill: #414142;
+    }
+    .bg{
+      <!-- fill: #414142; -->
+      <!-- fill: #D9D6CE; -->
+      fill: white;
+    }
+
+    .label{
+      text-transform: uppercase;
+    }
+    .bullet__text{
+      fill:white;
+      font-size:28px;
+    }
+    .bullet__bg{
+      fill:#14A7E0;
+    }
+  </style>
+  <rect class="bg" x="0" y="0" width="100%" height="100%"></rect>
+  <ellipse class="bullet__bg" cx="25" cy="25" rx="18" ry="18"></ellipse>
+  <text class="bullet__text" x="17" y="35">+</text>
+  <text class="label" x="50" y="31">Premium</text>
+</svg>

@@ -9,10 +9,11 @@ export class ScheduleContent {
   label: string;
   icon: string;
   highlight: boolean;
+  hasIncludedActivity: boolean;
+  hasPremiumActivity: boolean;
 
   // helpers
   occupied: boolean;
-  empty: boolean;
   subzones: any[];
 
   constructor(options: {
@@ -24,8 +25,9 @@ export class ScheduleContent {
     label?: string,
     icon?: string,
     highlight?: boolean,
-    occupied?: boolean,
-    empty?: boolean
+    hasIncludedActivity?: boolean,
+    hasPremiumActivity?: boolean,
+    occupied?: boolean
   } = {}) {
     this.update(options);
   }
@@ -40,8 +42,9 @@ export class ScheduleContent {
     label?: string,
     icon?: string,
     highlight?: boolean,
-    occupied?: boolean,
-    empty?: boolean
+    hasIncludedActivity?: boolean,
+    hasPremiumActivity?: boolean,
+    occupied?: boolean
   } = {}) {
     this.uuid = options.uuid ? options.uuid : UUID.UUID();
 
@@ -52,16 +55,16 @@ export class ScheduleContent {
     this.label = options.label || this.label;
     this.icon = options.icon || this.icon;
     this.highlight = options.highlight || this.highlight;
-
-    if (this.label && this.label.length) {
-      options.empty = false;
-      options.occupied = true;
-    }
+    this.hasIncludedActivity = options.hasIncludedActivity !== undefined ? options.hasIncludedActivity : this.hasIncludedActivity;
+    this.hasPremiumActivity = options.hasPremiumActivity !== undefined ? options.hasPremiumActivity : this.hasPremiumActivity;
 
     this.occupied = !!(options.occupied !== undefined ? options.occupied : this.occupied);
-    this.empty = (options.empty !== undefined ? options.empty : this.empty) !== false;
 
     this.updateSubzones();
+  }
+
+  get empty() {
+    return !(this.label && this.label.length || this.hasIncludedActivity || this.hasPremiumActivity);
   }
 
   getUpdatedCopy(options) {
@@ -96,9 +99,12 @@ export class ScheduleContent {
     this.subzones = [].concat(...periods);
   }
 
+  get formatedLabel() {
+    return this.label && this.label.replace(/\n/g, '<br/>');
+  }
+
   get exportable() {
     const obj = Object.assign({}, this);
-    delete obj.empty;
     delete obj.uuid;
     delete obj.occupied;
     delete obj.subzones;

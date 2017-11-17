@@ -4,6 +4,7 @@
   width: 100%;
   height: 100%;
   display: flex;
+  text-align: center;
 
   &:hover{
     .drag-handle{
@@ -59,9 +60,10 @@
   }
 }
 
-.placeholder{
+.content-empty{
   color: $champagne;
   opacity: 0;
+  cursor: pointer;
   
   &:hover{
     :host-context(.allow-new) &{
@@ -80,4 +82,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+img{
+  margin-bottom: 2px;
 }

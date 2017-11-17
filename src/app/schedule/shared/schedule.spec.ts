@@ -58,7 +58,6 @@ describe('Model: Schedule:', () => {
   it('should return an array of numbers of days', () => {
     const schedule = new Schedule();
     const days = schedule.numDaysOptions;
-    console.log(days);
 
     expect(days[0]).toBe(1);
     expect(days.length).toBe(7);

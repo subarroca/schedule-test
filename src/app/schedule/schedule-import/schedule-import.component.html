@@ -1,4 +1,5 @@
-<form [formGroup]="form">
+<form [formGroup]="form"
+ (ngSubmit)="import();scrollTop()">
   <div>
     <mat-form-field fxFlex>
       <textarea matInput
@@ -9,8 +10,8 @@
     </mat-form-field>
   </div>
   <button mat-button
+    [disabled]="!form.valid"
     color="primary"
-    (click)="import()"
     matStepperNext>
     Import
   </button>
