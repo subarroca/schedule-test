@@ -6,12 +6,6 @@
   display: flex;
   text-align: center;
   font-size: 0.85em;
-  
-  &:hover{
-    .drag-handle{
-      opacity: 1;
-    }
-  }
 }
 
 .cell{
@@ -50,7 +44,7 @@
   display: none;
 }
 
-.editing{
+:host-context(.editing){
   cursor: pointer;
 
   .content{
@@ -69,6 +63,12 @@
     top: 10px;
     left: 10px;
     opacity: 0;
+  }
+  
+  &:hover{
+    .drag-handle{
+      opacity: 1;
+    }
   }
 }
 
