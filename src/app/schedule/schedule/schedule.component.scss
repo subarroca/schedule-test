@@ -39,3 +39,21 @@ app-schedule-content{
 .resize-ghost-element{
   z-index: 4;
 }
+
+.day-holder{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1em;
+}
+
+.day{
+  flex: 1;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 0.5em;
+  text-align: center;
+
+  &--active{
+    color:$primary;
+  }
+}

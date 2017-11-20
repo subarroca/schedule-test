@@ -18,17 +18,26 @@
         </mat-icon>
       </span>
     </div>
-    
+
     <div class="field">
       <mat-form-field fxFlex>
         <textarea matInput
           formControlName="label"
           placeholder="Title"
           rows="3">
-          </textarea>
+        </textarea>
       </mat-form-field>
     </div>
-    
+
+    <div class="field">
+      <mat-form-field fxFlex>
+        <input matInput
+          type="text"
+          formControlName="labelShort"
+          placeholder="Title for mobile">
+      </mat-form-field>
+    </div>
+
     <div class="field">
       <mat-checkbox formControlName="hasIncludedActivity">
         <img src="assets/img/included-activity.svg"
@@ -36,7 +45,7 @@
           height="30px">
       </mat-checkbox>
     </div>
-    
+
     <div class="field">
       <mat-checkbox formControlName="hasPremiumActivity">
         <img src="assets/img/premium-activity.svg"

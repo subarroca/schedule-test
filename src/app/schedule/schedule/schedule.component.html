@@ -9,20 +9,32 @@
   </mat-form-field>
 </form>
 
-<mat-grid-list [cols]="schedule?.numDays+1"
-  rowHeight="72px"
+<div *ngIf="smallScreen$ | async"
+  class="day-holder">
+  <span class="day"
+    *ngFor="let day of sortedDays$ | async;let i =index"
+    [class.day--active]="i===selectedDay"
+    (click)="selectDay(i)">{{ day?.short }}</span>
+</div>
+
+<mat-grid-list [cols]="(smallScreen$ | async) ? 3 : schedule?.numDays+1"
+  [rowHeight]="(smallScreen$ | async) ? '42px' : '72px'"
   [class.visible-grid]="!!draggingContent || !!resizingContent"
   [class.allow-new]="!draggingContent && !resizingContent">
-  <mat-grid-tile>
-  </mat-grid-tile>
-
-  <!--days-->
-  <mat-grid-tile *ngFor="let day of sortedDays$|async">
-    {{ day?.full }}
-  </mat-grid-tile>
-
+  
+  <div *ngIf="!(smallScreen$ | async)">
+    <mat-grid-tile>
+    </mat-grid-tile>
+  
+    <!--days-->
+    <mat-grid-tile *ngFor="let day of sortedDays$ | async"
+      [colspan]="(smallScreen$ | async) ? 2 :  1">
+      {{ day?.full }}
+    </mat-grid-tile>
+  </div>
+  
   <!-- periods -->
-  <div *ngFor="let period of schedule?.visiblePeriods; let p = index">
+  <div *ngFor="let period of schedule?.visiblePeriods; let p = index;">
     <mat-grid-tile class="period-holder">
       <app-schedule-period [schedule]="schedule"
         [id]="p"
@@ -31,45 +43,33 @@
     </mat-grid-tile>
 
     <!-- contents -->
-    <mat-grid-tile *ngFor="let content of schedule?.contentGrid[p]"
-      [colspan]="content?.getLimitedDaySpan(schedule.numDays) || 1"
-      [rowspan]="content?.getLimitedPeriodSpan(schedule.numPeriods) || 1">
-      <app-schedule-content [content]="content"
-        mwlResizable
-        [enableGhostResize]="true"
-        [resizeEdges]="content.empty ? {} : {bottom: true, right: true}"
-        (resizeStart)="startResizing($event,content)"
-        (resizeEnd)="endResizing($event)"
-        resizeCursorPrecision="10"
-        dnd-draggable
-        [dragEnabled]="true"
-        [dragData]="content"
-        (onDragStart)="startDragging(content)"
-        (onDragEnd)="endDragging()">
-      </app-schedule-content>
+    <div *ngFor="let content of (smallScreen$ | async) ? [dayGridContent[p]]: schedule?.contentGrid[p]">
+      <mat-grid-tile *ngIf="content && !content?.occupied"
+        [colspan]="(smallScreen$ | async) ? 2 : content?.getLimitedDaySpan(schedule.numDays) || 1"
+        [rowspan]="content?.getLimitedPeriodSpan(schedule.numPeriods) || 1">
+        <app-schedule-content [content]="content"
+          mwlResizable
+          [enableGhostResize]="true"
+          [resizeEdges]="content.empty ? {} : {bottom: true, right: true}"
+          (resizeStart)="startResizing($event,content)"
+          (resizeEnd)="endResizing($event)"
+          resizeCursorPrecision="10"
+          dnd-draggable
+          [dragEnabled]="true"
+          [dragData]="content"
+          (onDragStart)="startDragging(content)"
+          (onDragEnd)="endDragging()">
+        </app-schedule-content>
 
-      <!-- drop zones -->
-
-      <!-- <mat-grid-list *ngIf="content.hasSubzones"
-        class="drop-zone"
-        [class.disabled]="!getAllowsDrop(day,p)()"
-        [cols]="content.daySpan"
-        rowHeight="72px">
-        <mat-grid-tile *ngFor="let zone of content.subzones"
+        <!-- drop zones -->
+        <div class="drop-zone"
+          *ngIf="content && !content.occupied"
+          [class.disabled]="draggingContent && !getAllowsDrop(content.day,content.period)()"
           dnd-droppable
-          [allowDrop]="getAllowsDrop(zone.day,zone.period)"
-          class="drop-zone"
-          (onDropSuccess)="onDrop($event, zone.day,zone.period)">
-        </mat-grid-tile>
-      </mat-grid-list> -->
-
-      <div class="drop-zone"
-        *ngIf="!content.occupied"
-        [class.disabled]="draggingContent && !getAllowsDrop(content.day,content.period)()"
-        dnd-droppable
-        [allowDrop]="getAllowsDrop(content.day,content.period)"
-        (onDropSuccess)="onDrop($event, content.day,content.period)">
-      </div>
-    </mat-grid-tile>
+          [allowDrop]="getAllowsDrop(content.day,content.period)"
+          (onDropSuccess)="onDrop($event, content.day,content.period)">
+        </div>
+      </mat-grid-tile>
+    </div>
   </div>
 </mat-grid-list>

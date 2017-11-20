@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import {
   MatButtonModule,
+  MatButtonToggleModule,
   MatCardModule,
   MatCheckboxModule,
   MatDialogModule,
@@ -32,6 +33,7 @@ import { ClipboardModule } from 'ngx-clipboard';
     DndModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
@@ -50,6 +52,7 @@ import { ClipboardModule } from 'ngx-clipboard';
     DndModule,
     FlexLayoutModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,
     MatDialogModule,

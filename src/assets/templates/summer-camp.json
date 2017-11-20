@@ -23,7 +23,7 @@
     {
       "period": 2,
       "periodSpan": 1,
-      "day": 0,
+      "day": 1,
       "daySpan": 4,
       "label": "Classes",
       "icon": "book",
@@ -32,7 +32,7 @@
     {
       "period": 2,
       "periodSpan": 1,
-      "day": 4,
+      "day": 5,
       "daySpan": 1,
       "label": "Classes & weekly test",
       "icon": "book",
@@ -41,7 +41,7 @@
     {
       "period": 2,
       "periodSpan": 1,
-      "day": 5,
+      "day": 6,
       "daySpan": 1,
       "label": "Free time",
       "icon": "emotsmile"
@@ -49,7 +49,7 @@
     {
       "period": 2,
       "periodSpan": 3,
-      "day": 6,
+      "day": 0,
       "daySpan": 1,
       "label": "Excursion to",
       "icon": "directions",
@@ -58,7 +58,7 @@
     {
       "period": 3,
       "periodSpan": 1,
-      "day": 0,
+      "day": 1,
       "daySpan": 6,
       "label": "Lunch",
       "icon": "cutlery"
@@ -82,7 +82,7 @@
     {
       "period": 6,
       "periodSpan": 1,
-      "day": 0,
+      "day": 6,
       "daySpan": 1,
       "label": " ",
       "icon": "emotsmile",
@@ -136,7 +136,7 @@
     {
       "period": 6,
       "periodSpan": 1,
-      "day": 6,
+      "day": 0,
       "daySpan": 1,
       "label": "Welcome party",
       "icon": "emotsmile",
@@ -145,35 +145,9 @@
     {
       "period": 4,
       "periodSpan": 1,
-      "day": 0,
-      "daySpan": 1,
-      "hasIncludedActivity": true,
-      "hasPremiumActivity": false
-    },
-    {
-      "period": 4,
-      "periodSpan": 1,
       "day": 1,
       "daySpan": 1,
       "hasIncludedActivity": true,
-      "hasPremiumActivity": true
-    },
-    {
-      "period": 4,
-      "periodSpan": 1,
-      "day": 3,
-      "daySpan": 1,
-      "hasIncludedActivity": true,
-      "hasPremiumActivity": true
-    },
-    {
-      "period": 4,
-      "periodSpan": 1,
-      "day": 5,
-      "daySpan": 1,
-      "label": " ",
-      "icon": "emotsmile",
-      "hasIncludedActivity": false,
       "hasPremiumActivity": false
     },
     {
@@ -181,6 +155,22 @@
       "periodSpan": 1,
       "day": 2,
       "daySpan": 1,
+      "hasIncludedActivity": true,
+      "hasPremiumActivity": true
+    },
+    {
+      "period": 4,
+      "periodSpan": 1,
+      "day": 4,
+      "daySpan": 1,
+      "hasIncludedActivity": true,
+      "hasPremiumActivity": true
+    },
+    {
+      "period": 4,
+      "periodSpan": 1,
+      "day": 6,
+      "daySpan": 1,
       "label": " ",
       "icon": "emotsmile",
       "hasIncludedActivity": false,
@@ -189,7 +179,17 @@
     {
       "period": 4,
       "periodSpan": 1,
-      "day": 4,
+      "day": 3,
+      "daySpan": 1,
+      "label": " ",
+      "icon": "emotsmile",
+      "hasIncludedActivity": false,
+      "hasPremiumActivity": false
+    },
+    {
+      "period": 4,
+      "periodSpan": 1,
+      "day": 5,
       "daySpan": 1,
       "hasIncludedActivity": true,
       "hasPremiumActivity": true

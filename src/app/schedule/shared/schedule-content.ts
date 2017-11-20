@@ -7,6 +7,7 @@ export class ScheduleContent {
   day = 0;
   daySpan = 1;
   label: string;
+  labelShort: string;
   icon: string;
   highlight: boolean;
   hasIncludedActivity: boolean;
@@ -23,6 +24,7 @@ export class ScheduleContent {
     day?: number,
     daySpan?: number,
     label?: string,
+    labelShort?: string,
     icon?: string,
     highlight?: boolean,
     hasIncludedActivity?: boolean,
@@ -40,6 +42,7 @@ export class ScheduleContent {
     day?: number,
     daySpan?: number,
     label?: string,
+    labelShort?: string,
     icon?: string,
     highlight?: boolean,
     hasIncludedActivity?: boolean,
@@ -53,6 +56,7 @@ export class ScheduleContent {
     this.day = (options.day !== undefined) ? options.day : this.day;
     this.daySpan = options.daySpan || this.daySpan || 1;
     this.label = options.label || this.label;
+    this.labelShort = options.labelShort || this.labelShort;
     this.icon = options.icon || this.icon;
     this.highlight = options.highlight || this.highlight;
     this.hasIncludedActivity = options.hasIncludedActivity !== undefined ? options.hasIncludedActivity : this.hasIncludedActivity;

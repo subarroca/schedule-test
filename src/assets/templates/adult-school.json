@@ -1,5 +1,5 @@
 {
-  "firstDay": 0,
+  "firstDay": 1,
   "numDays": 5,
   "numPeriods": 4,
   "language": "en",
@@ -16,14 +16,20 @@
       "periodSpan": 1,
       "day": 0,
       "daySpan": 5,
-      "label": "Oral Communication (Intensive 25 & Premium 30)\nExam preparation (Examp Prep 30)\nPrivate course (Combi 5 & 10)"
+      "label": "Oral Communication (Intensive 25 & Premium 30)\nExam preparation (Examp Prep 30)\nPrivate course (Combi 5 & 10)",
+      "labelShort": "Oral communication, Exam Prep, Private course",
+      "hasIncludedActivity": false,
+      "hasPremiumActivity": false
     },
     {
       "period": 2,
       "periodSpan": 1,
       "day": 0,
       "daySpan": 5,
-      "label": "Written Communication (Premium 30)\nExam Preparation (Exam Prep)\nPrivate course (Combi 10)"
+      "label": "Written Communication (Premium 30)\nExam Preparation (Exam Prep)\nPrivate course (Combi 10)",
+      "labelShort": "Written communication, Exam Prep, Private course",
+      "hasIncludedActivity": false,
+      "hasPremiumActivity": false
     },
     {
       "period": 3,

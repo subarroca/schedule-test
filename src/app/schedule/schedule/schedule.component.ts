@@ -1,10 +1,15 @@
+import 'rxjs/add/observable/combineLatest';
 import 'rxjs/add/operator/first';
+import 'rxjs/add/operator/map';
 
 import {
   Component,
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import {
+  ObservableMedia,
+} from '@angular/flex-layout';
 import {
   FormBuilder,
   FormGroup,
@@ -34,6 +39,9 @@ import {
   styleUrls: ['./schedule.component.scss']
 })
 export class ScheduleComponent implements OnInit, OnDestroy {
+  dayGridContent: ScheduleContent[] = [];
+  selectedDay = 0;
+  smallScreen$;
   droppableZones: boolean[][];
   cellSize: { width: number; height: number; };
   resizingContent: ScheduleContent;
@@ -41,7 +49,6 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   schedule: Schedule;
   schedule$$: Subscription;
   newSchedule$$: Subscription;
-
   sortedDays$: Observable<Weekday[]> = this.weekdayService.sortedDays$;
 
   form: FormGroup;
@@ -52,10 +59,15 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private scheduleService: ScheduleService,
     private weekdayService: WeekdayService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private media: ObservableMedia
   ) { }
 
   ngOnInit() {
+    this.smallScreen$ = this.media
+      .asObservable()
+      .map(media => ['xs'/* , 'sm' */].includes(media.mqAlias));
+
     this.form = this.fb.group({
       comment: '',
     })
@@ -70,6 +82,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     this.newSchedule$$ = this.scheduleService.newSchedule$
       .subscribe(() => {
         this.schedule = this.scheduleService.localScheduleSubject.getValue();
+        this.selectDay(this.selectedDay);
         this.form.controls.comment.setValue(this.schedule.comment);
       })
   }
@@ -157,4 +170,9 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   // getSubZones(content: ScheduleContent) {
   //   return Array(content.daySpan * content.periodSpan).fill(1);
   // }
+
+  selectDay(day) {
+    this.selectedDay = day;
+    this.dayGridContent = this.schedule.getContentGridForDay(day);
+  }
 }

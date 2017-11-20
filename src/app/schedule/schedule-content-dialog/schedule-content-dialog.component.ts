@@ -46,6 +46,7 @@ export class ScheduleContentDialogComponent implements OnInit {
 
     this.form = this.fb.group({
       label: this.content.label || '',
+      labelShort: this.content.labelShort || '',
       hasPremiumActivity: !!this.content.hasPremiumActivity,
       hasIncludedActivity: !!this.content.hasIncludedActivity,
       icon: this.content.icon || '',
@@ -73,6 +74,7 @@ export class ScheduleContentDialogComponent implements OnInit {
   save() {
     this.scheduleService.updateContent(this.content.uuid, this.content.getUpdatedCopy({
       label: this.form.value.label,
+      labelShort: this.form.value.labelShort,
       icon: this.form.value.icon,
       highlight: this.form.value.highlight,
       hasPremiumActivity: this.form.value.hasPremiumActivity,

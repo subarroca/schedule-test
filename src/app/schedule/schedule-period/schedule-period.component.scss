@@ -12,3 +12,11 @@
   font-weight: 700;
   font-size: 1.5em;
 }
+
+.to{
+  display: none;
+
+  @media screen and (min-width: 600px) {
+    display: block;
+  }
+}

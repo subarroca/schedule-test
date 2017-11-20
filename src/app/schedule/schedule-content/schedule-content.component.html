@@ -15,7 +15,9 @@
       {{content.icon}}
     </mat-icon>
   
-    <span [innerHtml] ="content.formatedLabel"></span>
+    <span class="label--full"[innerHtml] ="content.formatedLabel"></span>
+    <span class="label--short">{{content.labelShort || content.formatedLabel}}</span>
+
     <img src="assets/img/included-activity.svg"
       *ngIf="content.hasIncludedActivity"
       alt="Included activity"

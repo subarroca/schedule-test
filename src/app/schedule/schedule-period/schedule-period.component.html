@@ -1,8 +1,10 @@
-<div *ngIf=period?.from?.h>
+<div *ngIf=period?.from?.h
+  class="from">
   <span class="h">{{ period?.from?.h }}</span>
   <span class="m">{{period?.from?.m}}</span>
 </div>
-<div *ngIf=period?.to>
+<div *ngIf=period?.to
+  class="to">
   <span class="h">{{ period?.to?.h }}</span>
   <span class="m">{{period?.to?.m}}</span>
 </div>

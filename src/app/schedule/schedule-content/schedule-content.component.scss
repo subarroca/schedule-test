@@ -5,7 +5,8 @@
   height: 100%;
   display: flex;
   text-align: center;
-
+  font-size: 0.85em;
+  
   &:hover{
     .drag-handle{
       opacity: 1;
@@ -25,12 +26,13 @@
 }
 
 .cell{
+  text-transform: uppercase;
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 2px;
-  padding: 1em;
+  padding: 0.5em;
   border: 2px solid $white;
 }
 
@@ -74,16 +76,38 @@
 
 .icon{
   font-size: 24px;
-  margin-bottom: 5px;
+  margin: 5px 0.5em;
+}
+
+img{
+  margin: 2px 0.5em;  
 }
 
 .content-holder{
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  flex-direction: row;
+  width: 100%;
+  
+  @media screen and (min-width: 600px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
-img{
-  margin-bottom: 2px;
+.label--full{
+  display: none;
+
+  @media screen and (min-width: 600px) {
+    display: block;
+  }
+}
+
+.label--short{
+  text-align: left;
+  display: block;
+
+  @media screen and (min-width: 600px) {
+    display: none;
+  }
 }

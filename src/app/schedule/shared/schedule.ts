@@ -187,6 +187,30 @@ export class Schedule {
     this.contentGrid = grid.map(contentRow => contentRow.filter(content => !content.occupied));
   }
 
+  getContentGridForDay(day: number) {
+    const grid = Array.from(Array(this.numPeriods))
+      .map((pv, p) =>
+        this.contents.find(content =>
+          content.day <= day && content.day + content.daySpan > day
+          && content.period === p
+        ) || new ScheduleContent());
+
+    grid
+      .forEach(content => {
+        for (let p = 1; p < content.periodSpan; p++) {
+          grid[content.period + p].occupied = true;
+        }
+      });
+
+    return grid;
+  }
+
+  // getContentInSlot(day: number, period: number) {
+  //   return this.contents.find(content =>
+  //     content.day <= day && content.day + content.daySpan > day
+  //     && content.period <= period && content.period + content.periodSpan > period);
+  // }
+
 
 
   // RESIZING AND DRAGGING
@@ -223,9 +247,6 @@ export class Schedule {
         }
       }
     });
-
-    console.log(grid);
-
 
     grid[content.period][content.day] = false;
 
