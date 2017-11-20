@@ -1,5 +1,6 @@
 import {
   Component,
+  HostBinding,
   Input,
   OnInit,
 } from '@angular/core';
@@ -23,6 +24,7 @@ import {
 })
 export class ScheduleContentComponent implements OnInit {
   @Input() content: ScheduleContent;
+  @HostBinding('class.editing') @Input() isEditing: boolean;
 
   constructor(
     public dialog: MatDialog,
@@ -33,29 +35,31 @@ export class ScheduleContentComponent implements OnInit {
   }
 
   edit(ev: Event = null, isNew = false) {
-    if (ev) {
-      ev.stopPropagation();
-    }
-
-    const dialogRef = this.dialog.open(ScheduleContentDialogComponent, {
-      data: {
-        content: this.content
+    if (this.isEditing) {
+      if (ev) {
+        ev.stopPropagation();
       }
-    })
-      .afterClosed()
-      .first()
-      .subscribe(operation => {
-        if (operation) {
-          switch (operation.type) {
-            case 'delete':
-              this.scheduleService.deleteContent(this.content);
-              break;
-            case 'update':
-              this.update(this.content, operation.data, isNew)
-              break;
-          }
+
+      const dialogRef = this.dialog.open(ScheduleContentDialogComponent, {
+        data: {
+          content: this.content
         }
-      });
+      })
+        .afterClosed()
+        .first()
+        .subscribe(operation => {
+          if (operation) {
+            switch (operation.type) {
+              case 'delete':
+                this.scheduleService.deleteContent(this.content);
+                break;
+              case 'update':
+                this.update(this.content, operation.data, isNew)
+                break;
+            }
+          }
+        });
+    }
   }
 
   update(oldContent, newContent, isNew) {

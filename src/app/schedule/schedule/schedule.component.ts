@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 
 import {
   Component,
+  Input,
   OnDestroy,
   OnInit,
 } from '@angular/core';
@@ -39,6 +40,8 @@ import {
   styleUrls: ['./schedule.component.scss']
 })
 export class ScheduleComponent implements OnInit, OnDestroy {
+  @Input() isEditing: boolean;
+
   dayGridContent: ScheduleContent[] = [];
   selectedDay = 0;
   smallScreen$;

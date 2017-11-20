@@ -1,6 +1,7 @@
 <form [formGroup]="form"
   fxLayout="column"
-  fxLayoutGap="1em">
+  fxLayoutGap="1em"
+  *ngIf="isEditing">
   <mat-form-field fxFlex>
     <textarea matInput
       formControlName="comment"
@@ -8,6 +9,10 @@
     </textarea>
   </mat-form-field>
 </form>
+
+<div *ngIf="!isEditing">
+  {{schedule?.comment}}
+</div>
 
 <div *ngIf="smallScreen$ | async"
   class="day-holder">
@@ -21,22 +26,23 @@
   [rowHeight]="(smallScreen$ | async) ? '42px' : '72px'"
   [class.visible-grid]="!!draggingContent || !!resizingContent"
   [class.allow-new]="!draggingContent && !resizingContent">
-  
+
   <div *ngIf="!(smallScreen$ | async)">
     <mat-grid-tile>
     </mat-grid-tile>
-  
+
     <!--days-->
     <mat-grid-tile *ngFor="let day of sortedDays$ | async"
       [colspan]="(smallScreen$ | async) ? 2 :  1">
       {{ day?.full }}
     </mat-grid-tile>
   </div>
-  
+
   <!-- periods -->
   <div *ngFor="let period of schedule?.visiblePeriods; let p = index;">
     <mat-grid-tile class="period-holder">
       <app-schedule-period [schedule]="schedule"
+        [isEditing]=isEditing
         [id]="p"
         [period]="period">
       </app-schedule-period>
@@ -48,9 +54,10 @@
         [colspan]="(smallScreen$ | async) ? 2 : content?.getLimitedDaySpan(schedule.numDays) || 1"
         [rowspan]="content?.getLimitedPeriodSpan(schedule.numPeriods) || 1">
         <app-schedule-content [content]="content"
+          [isEditing]=isEditing
           mwlResizable
           [enableGhostResize]="true"
-          [resizeEdges]="content.empty ? {} : {bottom: true, right: true}"
+          [resizeEdges]="isEditing && !content.empty ? {bottom: true, right: true} : {}"
           (resizeStart)="startResizing($event,content)"
           (resizeEnd)="endResizing($event)"
           resizeCursorPrecision="10"
@@ -63,7 +70,7 @@
 
         <!-- drop zones -->
         <div class="drop-zone"
-          *ngIf="content && !content.occupied"
+          *ngIf="isEditing&&content && !content.occupied"
           [class.disabled]="draggingContent && !getAllowsDrop(content.day,content.period)()"
           dnd-droppable
           [allowDrop]="getAllowsDrop(content.day,content.period)"

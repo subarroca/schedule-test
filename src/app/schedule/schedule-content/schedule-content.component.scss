@@ -14,17 +14,6 @@
   }
 }
 
-.drag-handle{
-  transition: opacity .5s;
-  color: $champagne;
-  width: 36px;
-  height: 36px;
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  opacity: 0;
-}
-
 .cell{
   text-transform: uppercase;
   flex: 1;
@@ -56,11 +45,33 @@
       color: $black;
     }
   }
+}
+.drag-handle{
+  display: none;
+}
 
-  &:hover{
-    box-shadow: -5px -5px 0 rgba($champagne,.4) inset;
+.editing{
+  cursor: pointer;
+
+  .content{
+    &:hover{
+      box-shadow: -5px -5px 0 rgba($champagne,.4) inset;
+    }
+  }
+  
+  .drag-handle{
+    display: block;
+    transition: opacity .5s;
+    color: $champagne;
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    opacity: 0;
   }
 }
+
 
 .content-empty{
   color: $champagne;

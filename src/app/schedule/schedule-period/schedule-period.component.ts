@@ -10,6 +10,7 @@ import {
 } from '../shared/schedule-period';
 import {
   Component,
+  HostBinding,
   HostListener,
   Input,
   OnInit,
@@ -25,6 +26,7 @@ export class SchedulePeriodComponent implements OnInit {
   @Input() id: number;
   @Input() period: SchedulePeriod;
   @Input() schedule: Schedule;
+  @HostBinding('class.editing') @Input() isEditing: boolean;
 
 
   constructor(
@@ -35,21 +37,22 @@ export class SchedulePeriodComponent implements OnInit {
   ngOnInit() {
   }
 
-
   @HostListener('click', ['$event'])
   edit(ev: Event) {
-    ev.stopPropagation();
+    if (this.isEditing) {
+      ev.stopPropagation();
 
-    const dialogRef = this.dialog.open(SchedulePeriodDialogComponent, {
-      data: {
-        period: this.period
-      }
-    })
-      .afterClosed()
-      .first()
-      .subscribe((newPeriod: SchedulePeriod) => {
-        this.scheduleService.updatePeriod(this.id, newPeriod);
-      });
+      const dialogRef = this.dialog.open(SchedulePeriodDialogComponent, {
+        data: {
+          period: this.period
+        }
+      })
+        .afterClosed()
+        .first()
+        .subscribe((newPeriod: SchedulePeriod) => {
+          this.scheduleService.updatePeriod(this.id, newPeriod);
+        });
+    }
   }
 
 }
