@@ -22,8 +22,8 @@ import {
 
 @Injectable()
 export class ScheduleService {
-  newScheduleSubject: Subject<boolean> = new Subject<boolean>();
-  newSchedule$: Observable<boolean> = this.newScheduleSubject.asObservable();
+  newScheduleSubject: Subject<Schedule> = new Subject<Schedule>();
+  newSchedule$: Observable<Schedule> = this.newScheduleSubject.asObservable();
 
   localScheduleSubject: BehaviorSubject<Schedule> = new BehaviorSubject<Schedule>(new Schedule());
   localSchedule$: Observable<Schedule> = this.localScheduleSubject.asObservable();
@@ -38,14 +38,17 @@ export class ScheduleService {
   reset() {
     const schedule = new Schedule();
     this.localScheduleSubject.next(schedule);
-    this.newScheduleSubject.next(true);
+    // save a copy so changes don't affect directly the object
+    this.newScheduleSubject.next(schedule.getCopy());
     this.weekdayService.sortDays(schedule.firstDay, schedule.numDays);
     this.weekdayService.loadLanguage(schedule.language);
   }
 
   import(schedule) {
-    this.localScheduleSubject.next(new Schedule(schedule));
-    this.newScheduleSubject.next(true);
+    schedule = new Schedule(schedule);
+    this.localScheduleSubject.next(schedule);
+    // save a copy so changes don't affect directly the object
+    this.newScheduleSubject.next(schedule.getCopy());
     this.weekdayService.sortDays(schedule.firstDay, schedule.numDays);
     this.weekdayService.loadLanguage(schedule.language);
   }
@@ -65,17 +68,32 @@ export class ScheduleService {
     schedule.updatePeriod(periodId, period);
     this.localScheduleSubject.next(schedule);
   }
-  updateSettings(schedule: Schedule) {
+  updateComment(comment: string) {
+    const schedule = this.localScheduleSubject.getValue();
+    schedule.update({ comment: comment });
+    this.localScheduleSubject.next(schedule);
+  }
+  updateSettings(settings: {
+    firstDay: number,
+    numDays: number,
+    numPeriods: number,
+    language: string
+  }) {
     const oldSchedule = this.localScheduleSubject.getValue();
+    settings.numDays = Math.max(1, Math.min(7, settings.numDays));
+    settings.numPeriods = Math.max(1, settings.numPeriods);
 
-    if (oldSchedule.firstDay !== schedule.firstDay || oldSchedule.numDays !== schedule.numDays) {
-      this.weekdayService.sortDays(schedule.firstDay, schedule.numDays);
+    if (oldSchedule.firstDay !== settings.firstDay || oldSchedule.numDays !== settings.numDays) {
+      this.weekdayService.sortDays(settings.firstDay, settings.numDays);
     }
-    if (oldSchedule.language !== schedule.language) {
-      this.weekdayService.loadLanguage(schedule.language);
+    if (oldSchedule.numPeriods !== settings.numPeriods) {
+      oldSchedule.updateVisiblePeriods();
+    }
+    if (oldSchedule.language !== settings.language) {
+      this.weekdayService.loadLanguage(settings.language);
     }
 
-    oldSchedule.update(schedule);
+    oldSchedule.update(settings);
     this.localScheduleSubject.next(oldSchedule);
   }
 

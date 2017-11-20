@@ -65,7 +65,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
     this.form$$ = this.form
       .valueChanges
       .subscribe(
-      schedule => this.scheduleService.updateSettings(schedule));
+      schedule => this.scheduleService.updateComment(schedule.comment));
 
     this.newSchedule$$ = this.scheduleService.newSchedule$
       .subscribe(() => {

@@ -74,12 +74,15 @@ export class ScheduleSettingsComponent implements OnInit, OnDestroy {
       .valueChanges
       .debounceTime(200)
       .subscribe(
-      schedule => this.scheduleService.updateSettings(schedule));
+      settings => {
+        this.scheduleService.updateSettings(settings)
+      });
 
     this.newSchedule$$ = this.scheduleService.newSchedule$
-      .subscribe(() => {
-        this.schedule = this.scheduleService.localScheduleSubject.getValue();
+      .subscribe(schedule => {
+        this.schedule = schedule;
         this.updateForm();
+        this.scheduleService.updateSettings(schedule.settings);
       })
   }
 
@@ -101,21 +104,17 @@ export class ScheduleSettingsComponent implements OnInit, OnDestroy {
   }
 
   decreasePeriods() {
-    this.schedule.decreasePeriods();
-    this.form.controls.numPeriods.setValue(this.schedule.numPeriods);
+    this.form.controls.numPeriods.setValue(this.form.controls.numPeriods.value - 1);
   }
   increasePeriods() {
-    this.schedule.increasePeriods();
-    this.form.controls.numPeriods.setValue(this.schedule.numPeriods);
+    this.form.controls.numPeriods.setValue(this.form.controls.numPeriods.value + 1);
   }
 
   decreaseDays() {
-    this.schedule.decreaseDays();
-    this.form.controls.numDays.setValue(this.schedule.numDays);
+    this.form.controls.numDays.setValue(this.form.controls.numDays.value - 1);
   }
   increaseDays() {
-    this.schedule.increaseDays();
-    this.form.controls.numDays.setValue(this.schedule.numDays);
+    this.form.controls.numDays.setValue(this.form.controls.numDays.value + 1);
   }
 
 }

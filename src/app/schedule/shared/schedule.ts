@@ -108,7 +108,7 @@ export class Schedule {
 
 
   // PERIOD EDITION
-  private updateVisiblePeriods() {
+  updateVisiblePeriods() {
     this.periods = Array.from(Array(this.numPeriods))
       .map((period, key) => (this.periods[key]) ? this.periods[key] : new SchedulePeriod());
     this.visiblePeriods = this.periods.slice(0, this.numPeriods);
@@ -174,14 +174,17 @@ export class Schedule {
     this.contents.forEach(content => {
       for (let p = 0; p < content.periodSpan; p++) {
         for (let d = 0; d < content.daySpan; d++) {
-          grid[content.period + p][content.day + d].occupied = true;
+          if (grid[content.period + p] && grid[content.period + p][content.day + d]) {
+            grid[content.period + p][content.day + d].occupied = true;
+          }
         }
       }
-
-      grid[content.period][content.day] = content;
+      if (grid[content.period] && grid[content.period][content.day]) {
+        grid[content.period][content.day] = content;
+      }
     });
 
-    this.contentGrid = grid;
+    this.contentGrid = grid.map(contentRow => contentRow.filter(content => !content.occupied));
   }
 
 
@@ -220,6 +223,9 @@ export class Schedule {
         }
       }
     });
+
+    console.log(grid);
+
 
     grid[content.period][content.day] = false;
 
@@ -267,13 +273,23 @@ export class Schedule {
       firstDay: this.firstDay,
       numDays: this.numDays,
       numPeriods: this.numPeriods,
-      comment: this.comment,
       language: this.language,
+      comment: this.comment,
       contents: this.contents
         .filter(content => content.day < this.numDays && content.period < this.numPeriods)
         .map(content => content.exportable),
       periods: this.periods
         .slice(0, this.numPeriods),
+    };
+  }
+
+
+  get settings() {
+    return {
+      firstDay: this.firstDay,
+      numDays: this.numDays,
+      numPeriods: this.numPeriods,
+      language: this.language
     };
   }
 }

@@ -103,6 +103,13 @@ export class ScheduleContent {
     return this.label && this.label.replace(/\n/g, '<br/>');
   }
 
+  getLimitedDaySpan(numDays) {
+    return Math.min(this.daySpan, numDays - this.day);
+  }
+  getLimitedPeriodSpan(numPeriods) {
+    return Math.min(this.periodSpan, numPeriods - this.period);
+  }
+
   get exportable() {
     const obj = Object.assign({}, this);
     delete obj.uuid;
